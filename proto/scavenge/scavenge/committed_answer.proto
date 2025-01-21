@@ -1,0 +1,11 @@
+syntax = "proto3";
+package scavenge.scavenge;
+
+option go_package = "scavenge/x/scavenge/types";
+
+message CommittedAnswer {
+  
+  uint64 questionId = 1; 
+  string hashAnswer = 2; 
+  string creator = 3; 
+}
