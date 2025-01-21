@@ -38,6 +38,13 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{},
 				},
 
+				{
+					RpcMethod:      "ShowCommit",
+					Use:            "show-commit [question-id] [creator]",
+					Short:          "Query show-commit",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}, {ProtoField: "creator"}},
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
