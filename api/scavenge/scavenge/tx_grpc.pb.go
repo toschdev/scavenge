@@ -20,10 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Msg_UpdateParams_FullMethodName   = "/scavenge.scavenge.Msg/UpdateParams"
-	Msg_CreateQuestion_FullMethodName = "/scavenge.scavenge.Msg/CreateQuestion"
-	Msg_CommitAnswer_FullMethodName   = "/scavenge.scavenge.Msg/CommitAnswer"
-	Msg_RevealAnswer_FullMethodName   = "/scavenge.scavenge.Msg/RevealAnswer"
+	Msg_UpdateParams_FullMethodName     = "/scavenge.scavenge.Msg/UpdateParams"
+	Msg_CreateQuestion_FullMethodName   = "/scavenge.scavenge.Msg/CreateQuestion"
+	Msg_CommitAnswer_FullMethodName     = "/scavenge.scavenge.Msg/CommitAnswer"
+	Msg_RevealAnswer_FullMethodName     = "/scavenge.scavenge.Msg/RevealAnswer"
+	Msg_CompleteQuestion_FullMethodName = "/scavenge.scavenge.Msg/CompleteQuestion"
 )
 
 // MsgClient is the client API for Msg service.
@@ -36,6 +37,7 @@ type MsgClient interface {
 	CreateQuestion(ctx context.Context, in *MsgCreateQuestion, opts ...grpc.CallOption) (*MsgCreateQuestionResponse, error)
 	CommitAnswer(ctx context.Context, in *MsgCommitAnswer, opts ...grpc.CallOption) (*MsgCommitAnswerResponse, error)
 	RevealAnswer(ctx context.Context, in *MsgRevealAnswer, opts ...grpc.CallOption) (*MsgRevealAnswerResponse, error)
+	CompleteQuestion(ctx context.Context, in *MsgCompleteQuestion, opts ...grpc.CallOption) (*MsgCompleteQuestionResponse, error)
 }
 
 type msgClient struct {
@@ -82,6 +84,15 @@ func (c *msgClient) RevealAnswer(ctx context.Context, in *MsgRevealAnswer, opts 
 	return out, nil
 }
 
+func (c *msgClient) CompleteQuestion(ctx context.Context, in *MsgCompleteQuestion, opts ...grpc.CallOption) (*MsgCompleteQuestionResponse, error) {
+	out := new(MsgCompleteQuestionResponse)
+	err := c.cc.Invoke(ctx, Msg_CompleteQuestion_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -92,6 +103,7 @@ type MsgServer interface {
 	CreateQuestion(context.Context, *MsgCreateQuestion) (*MsgCreateQuestionResponse, error)
 	CommitAnswer(context.Context, *MsgCommitAnswer) (*MsgCommitAnswerResponse, error)
 	RevealAnswer(context.Context, *MsgRevealAnswer) (*MsgRevealAnswerResponse, error)
+	CompleteQuestion(context.Context, *MsgCompleteQuestion) (*MsgCompleteQuestionResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -110,6 +122,9 @@ func (UnimplementedMsgServer) CommitAnswer(context.Context, *MsgCommitAnswer) (*
 }
 func (UnimplementedMsgServer) RevealAnswer(context.Context, *MsgRevealAnswer) (*MsgRevealAnswerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RevealAnswer not implemented")
+}
+func (UnimplementedMsgServer) CompleteQuestion(context.Context, *MsgCompleteQuestion) (*MsgCompleteQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CompleteQuestion not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -196,6 +211,24 @@ func _Msg_RevealAnswer_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CompleteQuestion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCompleteQuestion)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CompleteQuestion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_CompleteQuestion_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CompleteQuestion(ctx, req.(*MsgCompleteQuestion))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -218,6 +251,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RevealAnswer",
 			Handler:    _Msg_RevealAnswer_Handler,
+		},
+		{
+			MethodName: "CompleteQuestion",
+			Handler:    _Msg_CompleteQuestion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
