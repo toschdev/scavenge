@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateQuestion",
+					Use:            "create-question [question] [encrypted-answer] [bounty]",
+					Short:          "Send a create-question tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "question"}, {ProtoField: "encryptedAnswer"}, {ProtoField: "bounty"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
