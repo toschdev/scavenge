@@ -187,17 +187,99 @@ func (m *QueryListQuestionsResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QueryListQuestionsResponse proto.InternalMessageInfo
 
+type QueryShowQuestionRequest struct {
+	QuestionId uint64 `protobuf:"varint,1,opt,name=questionId,proto3" json:"questionId,omitempty"`
+}
+
+func (m *QueryShowQuestionRequest) Reset()         { *m = QueryShowQuestionRequest{} }
+func (m *QueryShowQuestionRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryShowQuestionRequest) ProtoMessage()    {}
+func (*QueryShowQuestionRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6197257e32ffca5f, []int{4}
+}
+func (m *QueryShowQuestionRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryShowQuestionRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryShowQuestionRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryShowQuestionRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryShowQuestionRequest.Merge(m, src)
+}
+func (m *QueryShowQuestionRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryShowQuestionRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryShowQuestionRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryShowQuestionRequest proto.InternalMessageInfo
+
+func (m *QueryShowQuestionRequest) GetQuestionId() uint64 {
+	if m != nil {
+		return m.QuestionId
+	}
+	return 0
+}
+
+type QueryShowQuestionResponse struct {
+}
+
+func (m *QueryShowQuestionResponse) Reset()         { *m = QueryShowQuestionResponse{} }
+func (m *QueryShowQuestionResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryShowQuestionResponse) ProtoMessage()    {}
+func (*QueryShowQuestionResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6197257e32ffca5f, []int{5}
+}
+func (m *QueryShowQuestionResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryShowQuestionResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryShowQuestionResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryShowQuestionResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryShowQuestionResponse.Merge(m, src)
+}
+func (m *QueryShowQuestionResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryShowQuestionResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryShowQuestionResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryShowQuestionResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "scavenge.scavenge.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "scavenge.scavenge.QueryParamsResponse")
 	proto.RegisterType((*QueryListQuestionsRequest)(nil), "scavenge.scavenge.QueryListQuestionsRequest")
 	proto.RegisterType((*QueryListQuestionsResponse)(nil), "scavenge.scavenge.QueryListQuestionsResponse")
+	proto.RegisterType((*QueryShowQuestionRequest)(nil), "scavenge.scavenge.QueryShowQuestionRequest")
+	proto.RegisterType((*QueryShowQuestionResponse)(nil), "scavenge.scavenge.QueryShowQuestionResponse")
 }
 
 func init() { proto.RegisterFile("scavenge/scavenge/query.proto", fileDescriptor_6197257e32ffca5f) }
 
 var fileDescriptor_6197257e32ffca5f = []byte{
-	// 357 bytes of a gzipped FileDescriptorProto
+	// 433 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2d, 0x4e, 0x4e, 0x2c,
 	0x4b, 0xcd, 0x4b, 0x4f, 0xd5, 0x87, 0x33, 0x0a, 0x4b, 0x53, 0x8b, 0x2a, 0xf5, 0x0a, 0x8a, 0xf2,
 	0x4b, 0xf2, 0x85, 0x04, 0x61, 0xa2, 0x7a, 0x30, 0x86, 0x94, 0x60, 0x62, 0x6e, 0x66, 0x5e, 0xbe,
@@ -211,16 +293,21 @@ var fileDescriptor_6197257e32ffca5f = []byte{
 	0x0a, 0xd9, 0x70, 0xb1, 0x41, 0x34, 0x4b, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x1b, 0x49, 0xea, 0x61,
 	0xf8, 0x51, 0x0f, 0xa2, 0xc5, 0x89, 0xf3, 0xc4, 0x3d, 0x79, 0x86, 0x15, 0xcf, 0x37, 0x68, 0x31,
 	0x06, 0x41, 0xf5, 0x28, 0x49, 0x73, 0x49, 0x82, 0x0d, 0xf5, 0xc9, 0x2c, 0x2e, 0x09, 0x04, 0x59,
-	0x03, 0xf2, 0x12, 0xcc, 0x46, 0x19, 0x2e, 0x29, 0x6c, 0x92, 0x10, 0x8b, 0x8d, 0xe6, 0x32, 0x71,
-	0xb1, 0x82, 0xa5, 0x85, 0xaa, 0xb8, 0xd8, 0x20, 0x36, 0x08, 0xa9, 0x62, 0xb1, 0x1c, 0xd3, 0x2b,
-	0x52, 0x6a, 0x84, 0x94, 0x41, 0xac, 0x50, 0x52, 0x6c, 0xba, 0xfc, 0x64, 0x32, 0x93, 0xb4, 0x90,
-	0xa4, 0x3e, 0xae, 0x10, 0x13, 0x9a, 0xce, 0xc8, 0xc5, 0x8b, 0xe2, 0x3e, 0x21, 0x1d, 0x5c, 0x86,
-	0x63, 0xf3, 0xa3, 0x94, 0x2e, 0x91, 0xaa, 0xa1, 0x2e, 0xd2, 0x04, 0xbb, 0x48, 0x59, 0x48, 0x11,
-	0x8b, 0x8b, 0x72, 0x32, 0x8b, 0x4b, 0xe2, 0x0b, 0x61, 0x5a, 0x9c, 0x8c, 0x4f, 0x3c, 0x92, 0x63,
-	0xbc, 0xf0, 0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x2e, 0x3c, 0x96,
-	0x63, 0xb8, 0xf1, 0x58, 0x8e, 0x21, 0x4a, 0x12, 0xae, 0xa5, 0x02, 0xa1, 0xbb, 0xa4, 0xb2, 0x20,
-	0xb5, 0x38, 0x89, 0x0d, 0x9c, 0x02, 0x8c, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x8b, 0x4a, 0xea,
-	0xc4, 0xc8, 0x02, 0x00, 0x00,
+	0x03, 0xf2, 0x12, 0xcc, 0x46, 0x19, 0x2e, 0x29, 0x6c, 0x92, 0x10, 0x8b, 0x95, 0xac, 0xb8, 0x24,
+	0xc0, 0xb2, 0xc1, 0x19, 0xf9, 0xe5, 0x30, 0x59, 0xa8, 0x4e, 0x21, 0x39, 0x2e, 0xae, 0x42, 0xa8,
+	0x90, 0x67, 0x0a, 0xd8, 0x61, 0x2c, 0x41, 0x48, 0x22, 0x70, 0x6b, 0x51, 0xf5, 0x42, 0x0c, 0x36,
+	0x3a, 0xc0, 0xcc, 0xc5, 0x0a, 0x96, 0x15, 0xaa, 0xe2, 0x62, 0x83, 0x38, 0x5d, 0x48, 0x15, 0x8b,
+	0xaf, 0x30, 0xc3, 0x48, 0x4a, 0x8d, 0x90, 0x32, 0xa8, 0xdb, 0x15, 0x9b, 0x2e, 0x3f, 0x99, 0xcc,
+	0x24, 0x2d, 0x24, 0xa9, 0x8f, 0x2b, 0x2a, 0x84, 0xa6, 0x33, 0x72, 0xf1, 0xa2, 0x78, 0x5c, 0x48,
+	0x07, 0x97, 0xe1, 0xd8, 0x02, 0x4f, 0x4a, 0x97, 0x48, 0xd5, 0x50, 0x17, 0x69, 0x82, 0x5d, 0xa4,
+	0x2c, 0xa4, 0x88, 0xc5, 0x45, 0x39, 0x99, 0xc5, 0x25, 0xf1, 0x85, 0x70, 0x77, 0x2c, 0x60, 0xe4,
+	0xe2, 0x41, 0x0e, 0x38, 0x21, 0x6d, 0x5c, 0x56, 0x61, 0x89, 0x1a, 0x29, 0x1d, 0xe2, 0x14, 0x43,
+	0x9d, 0x65, 0x0a, 0x76, 0x96, 0xbe, 0x90, 0x2e, 0x16, 0x67, 0x15, 0x67, 0xe4, 0x97, 0xc3, 0x9d,
+	0xa5, 0x5f, 0x8d, 0x88, 0xde, 0x5a, 0x27, 0xe3, 0x13, 0x8f, 0xe4, 0x18, 0x2f, 0x3c, 0x92, 0x63,
+	0x7c, 0xf0, 0x48, 0x8e, 0x71, 0xc2, 0x63, 0x39, 0x86, 0x0b, 0x8f, 0xe5, 0x18, 0x6e, 0x3c, 0x96,
+	0x63, 0x88, 0x92, 0x84, 0x6b, 0xaf, 0x40, 0x98, 0x54, 0x52, 0x59, 0x90, 0x5a, 0x9c, 0xc4, 0x06,
+	0x4e, 0xfd, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x92, 0xec, 0x71, 0xe8, 0xc4, 0x03, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -239,6 +326,8 @@ type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	// Queries a list of ListQuestions items.
 	ListQuestions(ctx context.Context, in *QueryListQuestionsRequest, opts ...grpc.CallOption) (*QueryListQuestionsResponse, error)
+	// Queries a list of ShowQuestion items.
+	ShowQuestion(ctx context.Context, in *QueryShowQuestionRequest, opts ...grpc.CallOption) (*QueryShowQuestionResponse, error)
 }
 
 type queryClient struct {
@@ -267,12 +356,23 @@ func (c *queryClient) ListQuestions(ctx context.Context, in *QueryListQuestionsR
 	return out, nil
 }
 
+func (c *queryClient) ShowQuestion(ctx context.Context, in *QueryShowQuestionRequest, opts ...grpc.CallOption) (*QueryShowQuestionResponse, error) {
+	out := new(QueryShowQuestionResponse)
+	err := c.cc.Invoke(ctx, "/scavenge.scavenge.Query/ShowQuestion", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	// Queries a list of ListQuestions items.
 	ListQuestions(context.Context, *QueryListQuestionsRequest) (*QueryListQuestionsResponse, error)
+	// Queries a list of ShowQuestion items.
+	ShowQuestion(context.Context, *QueryShowQuestionRequest) (*QueryShowQuestionResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -284,6 +384,9 @@ func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsReq
 }
 func (*UnimplementedQueryServer) ListQuestions(ctx context.Context, req *QueryListQuestionsRequest) (*QueryListQuestionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListQuestions not implemented")
+}
+func (*UnimplementedQueryServer) ShowQuestion(ctx context.Context, req *QueryShowQuestionRequest) (*QueryShowQuestionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShowQuestion not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -326,6 +429,24 @@ func _Query_ListQuestions_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ShowQuestion_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryShowQuestionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ShowQuestion(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/scavenge.scavenge.Query/ShowQuestion",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ShowQuestion(ctx, req.(*QueryShowQuestionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var Query_serviceDesc = _Query_serviceDesc
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "scavenge.scavenge.Query",
@@ -338,6 +459,10 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListQuestions",
 			Handler:    _Query_ListQuestions_Handler,
+		},
+		{
+			MethodName: "ShowQuestion",
+			Handler:    _Query_ShowQuestion_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -446,6 +571,57 @@ func (m *QueryListQuestionsResponse) MarshalToSizedBuffer(dAtA []byte) (int, err
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryShowQuestionRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryShowQuestionRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryShowQuestionRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.QuestionId != 0 {
+		i = encodeVarintQuery(dAtA, i, uint64(m.QuestionId))
+		i--
+		dAtA[i] = 0x8
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryShowQuestionResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryShowQuestionResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryShowQuestionResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -487,6 +663,27 @@ func (m *QueryListQuestionsRequest) Size() (n int) {
 }
 
 func (m *QueryListQuestionsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *QueryShowQuestionRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.QuestionId != 0 {
+		n += 1 + sovQuery(uint64(m.QuestionId))
+	}
+	return n
+}
+
+func (m *QueryShowQuestionResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -711,6 +908,125 @@ func (m *QueryListQuestionsResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: QueryListQuestionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryShowQuestionRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryShowQuestionRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryShowQuestionRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QuestionId", wireType)
+			}
+			m.QuestionId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.QuestionId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryShowQuestionResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryShowQuestionResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryShowQuestionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

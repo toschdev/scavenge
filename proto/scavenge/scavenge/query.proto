@@ -24,6 +24,12 @@ service Query {
     option (google.api.http).get = "/scavenge/scavenge/list_questions";
   
   }
+  
+  // Queries a list of ShowQuestion items.
+  rpc ShowQuestion (QueryShowQuestionRequest) returns (QueryShowQuestionResponse) {
+    option (google.api.http).get = "/scavenge/scavenge/show_question/{questionId}";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -38,4 +44,10 @@ message QueryParamsResponse {
 message QueryListQuestionsRequest {}
 
 message QueryListQuestionsResponse {}
+
+message QueryShowQuestionRequest {
+  uint64 questionId = 1;
+}
+
+message QueryShowQuestionResponse {}
 
