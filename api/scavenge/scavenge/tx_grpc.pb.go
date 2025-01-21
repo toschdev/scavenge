@@ -23,6 +23,7 @@ const (
 	Msg_UpdateParams_FullMethodName   = "/scavenge.scavenge.Msg/UpdateParams"
 	Msg_CreateQuestion_FullMethodName = "/scavenge.scavenge.Msg/CreateQuestion"
 	Msg_CommitAnswer_FullMethodName   = "/scavenge.scavenge.Msg/CommitAnswer"
+	Msg_RevealAnswer_FullMethodName   = "/scavenge.scavenge.Msg/RevealAnswer"
 )
 
 // MsgClient is the client API for Msg service.
@@ -34,6 +35,7 @@ type MsgClient interface {
 	UpdateParams(ctx context.Context, in *MsgUpdateParams, opts ...grpc.CallOption) (*MsgUpdateParamsResponse, error)
 	CreateQuestion(ctx context.Context, in *MsgCreateQuestion, opts ...grpc.CallOption) (*MsgCreateQuestionResponse, error)
 	CommitAnswer(ctx context.Context, in *MsgCommitAnswer, opts ...grpc.CallOption) (*MsgCommitAnswerResponse, error)
+	RevealAnswer(ctx context.Context, in *MsgRevealAnswer, opts ...grpc.CallOption) (*MsgRevealAnswerResponse, error)
 }
 
 type msgClient struct {
@@ -71,6 +73,15 @@ func (c *msgClient) CommitAnswer(ctx context.Context, in *MsgCommitAnswer, opts 
 	return out, nil
 }
 
+func (c *msgClient) RevealAnswer(ctx context.Context, in *MsgRevealAnswer, opts ...grpc.CallOption) (*MsgRevealAnswerResponse, error) {
+	out := new(MsgRevealAnswerResponse)
+	err := c.cc.Invoke(ctx, Msg_RevealAnswer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 // All implementations must embed UnimplementedMsgServer
 // for forward compatibility
@@ -80,6 +91,7 @@ type MsgServer interface {
 	UpdateParams(context.Context, *MsgUpdateParams) (*MsgUpdateParamsResponse, error)
 	CreateQuestion(context.Context, *MsgCreateQuestion) (*MsgCreateQuestionResponse, error)
 	CommitAnswer(context.Context, *MsgCommitAnswer) (*MsgCommitAnswerResponse, error)
+	RevealAnswer(context.Context, *MsgRevealAnswer) (*MsgRevealAnswerResponse, error)
 	mustEmbedUnimplementedMsgServer()
 }
 
@@ -95,6 +107,9 @@ func (UnimplementedMsgServer) CreateQuestion(context.Context, *MsgCreateQuestion
 }
 func (UnimplementedMsgServer) CommitAnswer(context.Context, *MsgCommitAnswer) (*MsgCommitAnswerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitAnswer not implemented")
+}
+func (UnimplementedMsgServer) RevealAnswer(context.Context, *MsgRevealAnswer) (*MsgRevealAnswerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RevealAnswer not implemented")
 }
 func (UnimplementedMsgServer) mustEmbedUnimplementedMsgServer() {}
 
@@ -163,6 +178,24 @@ func _Msg_CommitAnswer_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_RevealAnswer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgRevealAnswer)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).RevealAnswer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Msg_RevealAnswer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).RevealAnswer(ctx, req.(*MsgRevealAnswer))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Msg_ServiceDesc is the grpc.ServiceDesc for Msg service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -181,6 +214,10 @@ var Msg_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CommitAnswer",
 			Handler:    _Msg_CommitAnswer_Handler,
+		},
+		{
+			MethodName: "RevealAnswer",
+			Handler:    _Msg_RevealAnswer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

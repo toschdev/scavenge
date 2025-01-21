@@ -31,6 +31,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCommitAnswer int = 100
 
+	opWeightMsgRevealAnswer = "op_weight_msg_reveal_answer"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRevealAnswer int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -76,6 +80,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		scavengesimulation.SimulateMsgCommitAnswer(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgRevealAnswer int
+	simState.AppParams.GetOrGenerate(opWeightMsgRevealAnswer, &weightMsgRevealAnswer, nil,
+		func(_ *rand.Rand) {
+			weightMsgRevealAnswer = defaultWeightMsgRevealAnswer
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRevealAnswer,
+		scavengesimulation.SimulateMsgRevealAnswer(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -97,6 +112,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCommitAnswer,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				scavengesimulation.SimulateMsgCommitAnswer(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgRevealAnswer,
+			defaultWeightMsgRevealAnswer,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				scavengesimulation.SimulateMsgRevealAnswer(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),
