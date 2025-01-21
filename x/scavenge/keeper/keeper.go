@@ -5,7 +5,9 @@ import (
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
+	storetypes "cosmossdk.io/store/types"
 	"github.com/cosmos/cosmos-sdk/codec"
+	"github.com/cosmos/cosmos-sdk/runtime"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"scavenge/x/scavenge/types"
@@ -48,6 +50,12 @@ func NewKeeper(
 		bankKeeper:    bankKeeper,
 		accountKeeper: accountKeeper,
 	}
+}
+
+// getStore returns a KVStore
+func (k Keeper) getStore(ctx sdk.Context) storetypes.KVStore {
+	storeAdapter := runtime.KVStoreAdapter(k.storeService.OpenKVStore(ctx))
+	return storeAdapter
 }
 
 // GetAuthority returns the module's authority.
