@@ -34,6 +34,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-question tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "question"}, {ProtoField: "encryptedAnswer"}, {ProtoField: "bounty"}},
 				},
+				{
+					RpcMethod:      "CommitAnswer",
+					Use:            "commit-answer [question-id] [hash-answer]",
+					Short:          "Send a commit-answer tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}, {ProtoField: "hashAnswer"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
