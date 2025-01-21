@@ -1,0 +1,17 @@
+syntax = "proto3";
+package scavenge.scavenge;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "scavenge/scavenge/params.proto";
+
+option go_package = "scavenge/x/scavenge/types";
+
+// GenesisState defines the scavenge module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
