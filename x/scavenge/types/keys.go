@@ -34,3 +34,15 @@ func CommitKey(questionId uint64, creator string) []byte {
 	binary.BigEndian.PutUint64(questionIdBytes, questionId)
 	return append(append(KeyPrefix(CommitKeyPrefix), questionIdBytes...), []byte(creator)...)
 }
+
+func GetCommittedAnswerKey(questionId uint64, creator string) []byte {
+	questionIdBytes := make([]byte, 8)
+	binary.BigEndian.PutUint64(questionIdBytes, questionId)
+
+	var key []byte
+	key = append(key, KeyPrefix(CommitKeyPrefix)...)
+	key = append(key, questionIdBytes...)
+	key = append(key, []byte(creator)...)
+
+	return key
+}
