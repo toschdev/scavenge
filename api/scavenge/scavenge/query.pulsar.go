@@ -3,7 +3,7 @@ package scavenge
 
 import (
 	_ "cosmossdk.io/api/amino"
-	_ "cosmossdk.io/api/cosmos/base/query/v1beta1"
+	v1beta1 "cosmossdk.io/api/cosmos/base/query/v1beta1"
 	fmt "fmt"
 	runtime "github.com/cosmos/cosmos-proto/runtime"
 	_ "github.com/cosmos/gogoproto/gogoproto"
@@ -808,12 +808,14 @@ func (x *fastReflection_QueryParamsResponse) ProtoMethods() *protoiface.Methods 
 }
 
 var (
-	md_QueryListQuestionsRequest protoreflect.MessageDescriptor
+	md_QueryListQuestionsRequest            protoreflect.MessageDescriptor
+	fd_QueryListQuestionsRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryListQuestionsRequest = File_scavenge_scavenge_query_proto.Messages().ByName("QueryListQuestionsRequest")
+	fd_QueryListQuestionsRequest_pagination = md_QueryListQuestionsRequest.Fields().ByName("pagination")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryListQuestionsRequest)(nil)
@@ -881,6 +883,12 @@ func (x *fastReflection_QueryListQuestionsRequest) Interface() protoreflect.Prot
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListQuestionsRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryListQuestionsRequest_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -896,6 +904,8 @@ func (x *fastReflection_QueryListQuestionsRequest) Range(f func(protoreflect.Fie
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryListQuestionsRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -912,6 +922,8 @@ func (x *fastReflection_QueryListQuestionsRequest) Has(fd protoreflect.FieldDesc
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -928,6 +940,9 @@ func (x *fastReflection_QueryListQuestionsRequest) Clear(fd protoreflect.FieldDe
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryListQuestionsRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -948,6 +963,8 @@ func (x *fastReflection_QueryListQuestionsRequest) Get(descriptor protoreflect.F
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -968,6 +985,11 @@ func (x *fastReflection_QueryListQuestionsRequest) Set(fd protoreflect.FieldDesc
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageRequest)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -981,6 +1003,9 @@ func (x *fastReflection_QueryListQuestionsRequest) Mutable(fd protoreflect.Field
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryListQuestionsRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsRequest.pagination":
+		m := new(v1beta1.PageRequest)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsRequest"))
@@ -1050,6 +1075,10 @@ func (x *fastReflection_QueryListQuestionsRequest) ProtoMethods() *protoiface.Me
 		var n int
 		var l int
 		_ = l
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1078,6 +1107,20 @@ func (x *fastReflection_QueryListQuestionsRequest) ProtoMethods() *protoiface.Me
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1128,6 +1171,42 @@ func (x *fastReflection_QueryListQuestionsRequest) ProtoMethods() *protoiface.Me
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListQuestionsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageRequest{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1163,13 +1242,68 @@ func (x *fastReflection_QueryListQuestionsRequest) ProtoMethods() *protoiface.Me
 	}
 }
 
+var _ protoreflect.List = (*_QueryListQuestionsResponse_1_list)(nil)
+
+type _QueryListQuestionsResponse_1_list struct {
+	list *[]*ScavengeQuestion
+}
+
+func (x *_QueryListQuestionsResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryListQuestionsResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryListQuestionsResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*ScavengeQuestion)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryListQuestionsResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*ScavengeQuestion)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryListQuestionsResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(ScavengeQuestion)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListQuestionsResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryListQuestionsResponse_1_list) NewElement() protoreflect.Value {
+	v := new(ScavengeQuestion)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListQuestionsResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_QueryListQuestionsResponse protoreflect.MessageDescriptor
+	md_QueryListQuestionsResponse                  protoreflect.MessageDescriptor
+	fd_QueryListQuestionsResponse_scavengeQuestion protoreflect.FieldDescriptor
+	fd_QueryListQuestionsResponse_pagination       protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryListQuestionsResponse = File_scavenge_scavenge_query_proto.Messages().ByName("QueryListQuestionsResponse")
+	fd_QueryListQuestionsResponse_scavengeQuestion = md_QueryListQuestionsResponse.Fields().ByName("scavengeQuestion")
+	fd_QueryListQuestionsResponse_pagination = md_QueryListQuestionsResponse.Fields().ByName("pagination")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryListQuestionsResponse)(nil)
@@ -1237,6 +1371,18 @@ func (x *fastReflection_QueryListQuestionsResponse) Interface() protoreflect.Pro
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListQuestionsResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.ScavengeQuestion) != 0 {
+		value := protoreflect.ValueOfList(&_QueryListQuestionsResponse_1_list{list: &x.ScavengeQuestion})
+		if !f(fd_QueryListQuestionsResponse_scavengeQuestion, value) {
+			return
+		}
+	}
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryListQuestionsResponse_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -1252,6 +1398,10 @@ func (x *fastReflection_QueryListQuestionsResponse) Range(f func(protoreflect.Fi
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryListQuestionsResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		return len(x.ScavengeQuestion) != 0
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1268,6 +1418,10 @@ func (x *fastReflection_QueryListQuestionsResponse) Has(fd protoreflect.FieldDes
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		x.ScavengeQuestion = nil
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1284,6 +1438,15 @@ func (x *fastReflection_QueryListQuestionsResponse) Clear(fd protoreflect.FieldD
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryListQuestionsResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		if len(x.ScavengeQuestion) == 0 {
+			return protoreflect.ValueOfList(&_QueryListQuestionsResponse_1_list{})
+		}
+		listValue := &_QueryListQuestionsResponse_1_list{list: &x.ScavengeQuestion}
+		return protoreflect.ValueOfList(listValue)
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1304,6 +1467,12 @@ func (x *fastReflection_QueryListQuestionsResponse) Get(descriptor protoreflect.
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		lv := value.List()
+		clv := lv.(*_QueryListQuestionsResponse_1_list)
+		x.ScavengeQuestion = *clv.list
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1324,6 +1493,17 @@ func (x *fastReflection_QueryListQuestionsResponse) Set(fd protoreflect.FieldDes
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListQuestionsResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		if x.ScavengeQuestion == nil {
+			x.ScavengeQuestion = []*ScavengeQuestion{}
+		}
+		value := &_QueryListQuestionsResponse_1_list{list: &x.ScavengeQuestion}
+		return protoreflect.ValueOfList(value)
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageResponse)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1337,6 +1517,12 @@ func (x *fastReflection_QueryListQuestionsResponse) Mutable(fd protoreflect.Fiel
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryListQuestionsResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion":
+		list := []*ScavengeQuestion{}
+		return protoreflect.ValueOfList(&_QueryListQuestionsResponse_1_list{list: &list})
+	case "scavenge.scavenge.QueryListQuestionsResponse.pagination":
+		m := new(v1beta1.PageResponse)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListQuestionsResponse"))
@@ -1406,6 +1592,16 @@ func (x *fastReflection_QueryListQuestionsResponse) ProtoMethods() *protoiface.M
 		var n int
 		var l int
 		_ = l
+		if len(x.ScavengeQuestion) > 0 {
+			for _, e := range x.ScavengeQuestion {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1434,6 +1630,36 @@ func (x *fastReflection_QueryListQuestionsResponse) ProtoMethods() *protoiface.M
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.ScavengeQuestion) > 0 {
+			for iNdEx := len(x.ScavengeQuestion) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.ScavengeQuestion[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1484,6 +1710,76 @@ func (x *fastReflection_QueryListQuestionsResponse) ProtoMethods() *protoiface.M
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListQuestionsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ScavengeQuestion", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ScavengeQuestion = append(x.ScavengeQuestion, &ScavengeQuestion{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ScavengeQuestion[len(x.ScavengeQuestion)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageResponse{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -1924,12 +2220,14 @@ func (x *fastReflection_QueryShowQuestionRequest) ProtoMethods() *protoiface.Met
 }
 
 var (
-	md_QueryShowQuestionResponse protoreflect.MessageDescriptor
+	md_QueryShowQuestionResponse                  protoreflect.MessageDescriptor
+	fd_QueryShowQuestionResponse_scavengeQuestion protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryShowQuestionResponse = File_scavenge_scavenge_query_proto.Messages().ByName("QueryShowQuestionResponse")
+	fd_QueryShowQuestionResponse_scavengeQuestion = md_QueryShowQuestionResponse.Fields().ByName("scavengeQuestion")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryShowQuestionResponse)(nil)
@@ -1997,6 +2295,12 @@ func (x *fastReflection_QueryShowQuestionResponse) Interface() protoreflect.Prot
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryShowQuestionResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.ScavengeQuestion != nil {
+		value := protoreflect.ValueOfMessage(x.ScavengeQuestion.ProtoReflect())
+		if !f(fd_QueryShowQuestionResponse_scavengeQuestion, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -2012,6 +2316,8 @@ func (x *fastReflection_QueryShowQuestionResponse) Range(f func(protoreflect.Fie
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryShowQuestionResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		return x.ScavengeQuestion != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2028,6 +2334,8 @@ func (x *fastReflection_QueryShowQuestionResponse) Has(fd protoreflect.FieldDesc
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowQuestionResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		x.ScavengeQuestion = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2044,6 +2352,9 @@ func (x *fastReflection_QueryShowQuestionResponse) Clear(fd protoreflect.FieldDe
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryShowQuestionResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		value := x.ScavengeQuestion
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2064,6 +2375,8 @@ func (x *fastReflection_QueryShowQuestionResponse) Get(descriptor protoreflect.F
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowQuestionResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		x.ScavengeQuestion = value.Message().Interface().(*ScavengeQuestion)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2084,6 +2397,11 @@ func (x *fastReflection_QueryShowQuestionResponse) Set(fd protoreflect.FieldDesc
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowQuestionResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		if x.ScavengeQuestion == nil {
+			x.ScavengeQuestion = new(ScavengeQuestion)
+		}
+		return protoreflect.ValueOfMessage(x.ScavengeQuestion.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2097,6 +2415,9 @@ func (x *fastReflection_QueryShowQuestionResponse) Mutable(fd protoreflect.Field
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryShowQuestionResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion":
+		m := new(ScavengeQuestion)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowQuestionResponse"))
@@ -2166,6 +2487,10 @@ func (x *fastReflection_QueryShowQuestionResponse) ProtoMethods() *protoiface.Me
 		var n int
 		var l int
 		_ = l
+		if x.ScavengeQuestion != nil {
+			l = options.Size(x.ScavengeQuestion)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2194,6 +2519,20 @@ func (x *fastReflection_QueryShowQuestionResponse) ProtoMethods() *protoiface.Me
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.ScavengeQuestion != nil {
+			encoded, err := options.Marshal(x.ScavengeQuestion)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -2244,6 +2583,42 @@ func (x *fastReflection_QueryShowQuestionResponse) ProtoMethods() *protoiface.Me
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowQuestionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ScavengeQuestion", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.ScavengeQuestion == nil {
+					x.ScavengeQuestion = &ScavengeQuestion{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.ScavengeQuestion); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -2280,12 +2655,14 @@ func (x *fastReflection_QueryShowQuestionResponse) ProtoMethods() *protoiface.Me
 }
 
 var (
-	md_QueryListCommitsRequest protoreflect.MessageDescriptor
+	md_QueryListCommitsRequest            protoreflect.MessageDescriptor
+	fd_QueryListCommitsRequest_pagination protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryListCommitsRequest = File_scavenge_scavenge_query_proto.Messages().ByName("QueryListCommitsRequest")
+	fd_QueryListCommitsRequest_pagination = md_QueryListCommitsRequest.Fields().ByName("pagination")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryListCommitsRequest)(nil)
@@ -2353,6 +2730,12 @@ func (x *fastReflection_QueryListCommitsRequest) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListCommitsRequest) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryListCommitsRequest_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -2368,6 +2751,8 @@ func (x *fastReflection_QueryListCommitsRequest) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryListCommitsRequest) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2384,6 +2769,8 @@ func (x *fastReflection_QueryListCommitsRequest) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsRequest) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2400,6 +2787,9 @@ func (x *fastReflection_QueryListCommitsRequest) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryListCommitsRequest) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2420,6 +2810,8 @@ func (x *fastReflection_QueryListCommitsRequest) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsRequest) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageRequest)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2440,6 +2832,11 @@ func (x *fastReflection_QueryListCommitsRequest) Set(fd protoreflect.FieldDescri
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsRequest) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageRequest)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2453,6 +2850,9 @@ func (x *fastReflection_QueryListCommitsRequest) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryListCommitsRequest) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsRequest.pagination":
+		m := new(v1beta1.PageRequest)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsRequest"))
@@ -2522,6 +2922,10 @@ func (x *fastReflection_QueryListCommitsRequest) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2550,6 +2954,20 @@ func (x *fastReflection_QueryListCommitsRequest) ProtoMethods() *protoiface.Meth
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -2600,6 +3018,42 @@ func (x *fastReflection_QueryListCommitsRequest) ProtoMethods() *protoiface.Meth
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListCommitsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageRequest{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -2635,13 +3089,68 @@ func (x *fastReflection_QueryListCommitsRequest) ProtoMethods() *protoiface.Meth
 	}
 }
 
+var _ protoreflect.List = (*_QueryListCommitsResponse_1_list)(nil)
+
+type _QueryListCommitsResponse_1_list struct {
+	list *[]*CommittedAnswer
+}
+
+func (x *_QueryListCommitsResponse_1_list) Len() int {
+	if x.list == nil {
+		return 0
+	}
+	return len(*x.list)
+}
+
+func (x *_QueryListCommitsResponse_1_list) Get(i int) protoreflect.Value {
+	return protoreflect.ValueOfMessage((*x.list)[i].ProtoReflect())
+}
+
+func (x *_QueryListCommitsResponse_1_list) Set(i int, value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*CommittedAnswer)
+	(*x.list)[i] = concreteValue
+}
+
+func (x *_QueryListCommitsResponse_1_list) Append(value protoreflect.Value) {
+	valueUnwrapped := value.Message()
+	concreteValue := valueUnwrapped.Interface().(*CommittedAnswer)
+	*x.list = append(*x.list, concreteValue)
+}
+
+func (x *_QueryListCommitsResponse_1_list) AppendMutable() protoreflect.Value {
+	v := new(CommittedAnswer)
+	*x.list = append(*x.list, v)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListCommitsResponse_1_list) Truncate(n int) {
+	for i := n; i < len(*x.list); i++ {
+		(*x.list)[i] = nil
+	}
+	*x.list = (*x.list)[:n]
+}
+
+func (x *_QueryListCommitsResponse_1_list) NewElement() protoreflect.Value {
+	v := new(CommittedAnswer)
+	return protoreflect.ValueOfMessage(v.ProtoReflect())
+}
+
+func (x *_QueryListCommitsResponse_1_list) IsValid() bool {
+	return x.list != nil
+}
+
 var (
-	md_QueryListCommitsResponse protoreflect.MessageDescriptor
+	md_QueryListCommitsResponse                 protoreflect.MessageDescriptor
+	fd_QueryListCommitsResponse_committedAnswer protoreflect.FieldDescriptor
+	fd_QueryListCommitsResponse_pagination      protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryListCommitsResponse = File_scavenge_scavenge_query_proto.Messages().ByName("QueryListCommitsResponse")
+	fd_QueryListCommitsResponse_committedAnswer = md_QueryListCommitsResponse.Fields().ByName("committedAnswer")
+	fd_QueryListCommitsResponse_pagination = md_QueryListCommitsResponse.Fields().ByName("pagination")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryListCommitsResponse)(nil)
@@ -2709,6 +3218,18 @@ func (x *fastReflection_QueryListCommitsResponse) Interface() protoreflect.Proto
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryListCommitsResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if len(x.CommittedAnswer) != 0 {
+		value := protoreflect.ValueOfList(&_QueryListCommitsResponse_1_list{list: &x.CommittedAnswer})
+		if !f(fd_QueryListCommitsResponse_committedAnswer, value) {
+			return
+		}
+	}
+	if x.Pagination != nil {
+		value := protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
+		if !f(fd_QueryListCommitsResponse_pagination, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -2724,6 +3245,10 @@ func (x *fastReflection_QueryListCommitsResponse) Range(f func(protoreflect.Fiel
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryListCommitsResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		return len(x.CommittedAnswer) != 0
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		return x.Pagination != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2740,6 +3265,10 @@ func (x *fastReflection_QueryListCommitsResponse) Has(fd protoreflect.FieldDescr
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		x.CommittedAnswer = nil
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		x.Pagination = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2756,6 +3285,15 @@ func (x *fastReflection_QueryListCommitsResponse) Clear(fd protoreflect.FieldDes
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryListCommitsResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		if len(x.CommittedAnswer) == 0 {
+			return protoreflect.ValueOfList(&_QueryListCommitsResponse_1_list{})
+		}
+		listValue := &_QueryListCommitsResponse_1_list{list: &x.CommittedAnswer}
+		return protoreflect.ValueOfList(listValue)
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		value := x.Pagination
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2776,6 +3314,12 @@ func (x *fastReflection_QueryListCommitsResponse) Get(descriptor protoreflect.Fi
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		lv := value.List()
+		clv := lv.(*_QueryListCommitsResponse_1_list)
+		x.CommittedAnswer = *clv.list
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		x.Pagination = value.Message().Interface().(*v1beta1.PageResponse)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2796,6 +3340,17 @@ func (x *fastReflection_QueryListCommitsResponse) Set(fd protoreflect.FieldDescr
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryListCommitsResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		if x.CommittedAnswer == nil {
+			x.CommittedAnswer = []*CommittedAnswer{}
+		}
+		value := &_QueryListCommitsResponse_1_list{list: &x.CommittedAnswer}
+		return protoreflect.ValueOfList(value)
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		if x.Pagination == nil {
+			x.Pagination = new(v1beta1.PageResponse)
+		}
+		return protoreflect.ValueOfMessage(x.Pagination.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2809,6 +3364,12 @@ func (x *fastReflection_QueryListCommitsResponse) Mutable(fd protoreflect.FieldD
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryListCommitsResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryListCommitsResponse.committedAnswer":
+		list := []*CommittedAnswer{}
+		return protoreflect.ValueOfList(&_QueryListCommitsResponse_1_list{list: &list})
+	case "scavenge.scavenge.QueryListCommitsResponse.pagination":
+		m := new(v1beta1.PageResponse)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryListCommitsResponse"))
@@ -2878,6 +3439,16 @@ func (x *fastReflection_QueryListCommitsResponse) ProtoMethods() *protoiface.Met
 		var n int
 		var l int
 		_ = l
+		if len(x.CommittedAnswer) > 0 {
+			for _, e := range x.CommittedAnswer {
+				l = options.Size(e)
+				n += 1 + l + runtime.Sov(uint64(l))
+			}
+		}
+		if x.Pagination != nil {
+			l = options.Size(x.Pagination)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -2906,6 +3477,36 @@ func (x *fastReflection_QueryListCommitsResponse) ProtoMethods() *protoiface.Met
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Pagination != nil {
+			encoded, err := options.Marshal(x.Pagination)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0x12
+		}
+		if len(x.CommittedAnswer) > 0 {
+			for iNdEx := len(x.CommittedAnswer) - 1; iNdEx >= 0; iNdEx-- {
+				encoded, err := options.Marshal(x.CommittedAnswer[iNdEx])
+				if err != nil {
+					return protoiface.MarshalOutput{
+						NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+						Buf:               input.Buf,
+					}, err
+				}
+				i -= len(encoded)
+				copy(dAtA[i:], encoded)
+				i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+				i--
+				dAtA[i] = 0xa
+			}
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -2956,6 +3557,76 @@ func (x *fastReflection_QueryListCommitsResponse) ProtoMethods() *protoiface.Met
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryListCommitsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CommittedAnswer", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.CommittedAnswer = append(x.CommittedAnswer, &CommittedAnswer{})
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.CommittedAnswer[len(x.CommittedAnswer)-1]); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
+			case 2:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.Pagination == nil {
+					x.Pagination = &v1beta1.PageResponse{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.Pagination); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -3460,12 +4131,14 @@ func (x *fastReflection_QueryShowCommitRequest) ProtoMethods() *protoiface.Metho
 }
 
 var (
-	md_QueryShowCommitResponse protoreflect.MessageDescriptor
+	md_QueryShowCommitResponse                 protoreflect.MessageDescriptor
+	fd_QueryShowCommitResponse_committedAnswer protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_query_proto_init()
 	md_QueryShowCommitResponse = File_scavenge_scavenge_query_proto.Messages().ByName("QueryShowCommitResponse")
+	fd_QueryShowCommitResponse_committedAnswer = md_QueryShowCommitResponse.Fields().ByName("committedAnswer")
 }
 
 var _ protoreflect.Message = (*fastReflection_QueryShowCommitResponse)(nil)
@@ -3533,6 +4206,12 @@ func (x *fastReflection_QueryShowCommitResponse) Interface() protoreflect.ProtoM
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_QueryShowCommitResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.CommittedAnswer != nil {
+		value := protoreflect.ValueOfMessage(x.CommittedAnswer.ProtoReflect())
+		if !f(fd_QueryShowCommitResponse_committedAnswer, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -3548,6 +4227,8 @@ func (x *fastReflection_QueryShowCommitResponse) Range(f func(protoreflect.Field
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_QueryShowCommitResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		return x.CommittedAnswer != nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3564,6 +4245,8 @@ func (x *fastReflection_QueryShowCommitResponse) Has(fd protoreflect.FieldDescri
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowCommitResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		x.CommittedAnswer = nil
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3580,6 +4263,9 @@ func (x *fastReflection_QueryShowCommitResponse) Clear(fd protoreflect.FieldDesc
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_QueryShowCommitResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		value := x.CommittedAnswer
+		return protoreflect.ValueOfMessage(value.ProtoReflect())
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3600,6 +4286,8 @@ func (x *fastReflection_QueryShowCommitResponse) Get(descriptor protoreflect.Fie
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowCommitResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		x.CommittedAnswer = value.Message().Interface().(*CommittedAnswer)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3620,6 +4308,11 @@ func (x *fastReflection_QueryShowCommitResponse) Set(fd protoreflect.FieldDescri
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_QueryShowCommitResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		if x.CommittedAnswer == nil {
+			x.CommittedAnswer = new(CommittedAnswer)
+		}
+		return protoreflect.ValueOfMessage(x.CommittedAnswer.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3633,6 +4326,9 @@ func (x *fastReflection_QueryShowCommitResponse) Mutable(fd protoreflect.FieldDe
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_QueryShowCommitResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.QueryShowCommitResponse.committedAnswer":
+		m := new(CommittedAnswer)
+		return protoreflect.ValueOfMessage(m.ProtoReflect())
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.QueryShowCommitResponse"))
@@ -3702,6 +4398,10 @@ func (x *fastReflection_QueryShowCommitResponse) ProtoMethods() *protoiface.Meth
 		var n int
 		var l int
 		_ = l
+		if x.CommittedAnswer != nil {
+			l = options.Size(x.CommittedAnswer)
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -3730,6 +4430,20 @@ func (x *fastReflection_QueryShowCommitResponse) ProtoMethods() *protoiface.Meth
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.CommittedAnswer != nil {
+			encoded, err := options.Marshal(x.CommittedAnswer)
+			if err != nil {
+				return protoiface.MarshalOutput{
+					NoUnkeyedLiterals: input.NoUnkeyedLiterals,
+					Buf:               input.Buf,
+				}, err
+			}
+			i -= len(encoded)
+			copy(dAtA[i:], encoded)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(encoded)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -3780,6 +4494,42 @@ func (x *fastReflection_QueryShowCommitResponse) ProtoMethods() *protoiface.Meth
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: QueryShowCommitResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field CommittedAnswer", wireType)
+				}
+				var msglen int
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					msglen |= int(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				if msglen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + msglen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				if x.CommittedAnswer == nil {
+					x.CommittedAnswer = &CommittedAnswer{}
+				}
+				if err := options.Unmarshal(dAtA[iNdEx:postIndex], x.CommittedAnswer); err != nil {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, err
+				}
+				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -3892,10 +4642,14 @@ func (x *QueryParamsResponse) GetParams() *Params {
 	return nil
 }
 
+// QueryListQuestionsRequest is request type for the Query/ListQuestions RPC method
 type QueryListQuestionsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	// pagination defines an optional pagination for the request.
+	Pagination *v1beta1.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListQuestionsRequest) Reset() {
@@ -3918,10 +4672,22 @@ func (*QueryListQuestionsRequest) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{2}
 }
 
+func (x *QueryListQuestionsRequest) GetPagination() *v1beta1.PageRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
 type QueryListQuestionsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	// items holds all the scavenge questions
+	ScavengeQuestion []*ScavengeQuestion `protobuf:"bytes,1,rep,name=scavengeQuestion,proto3" json:"scavengeQuestion,omitempty"`
+	// pagination defines the pagination in the response.
+	Pagination *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListQuestionsResponse) Reset() {
@@ -3942,6 +4708,20 @@ func (*QueryListQuestionsResponse) ProtoMessage() {}
 // Deprecated: Use QueryListQuestionsResponse.ProtoReflect.Descriptor instead.
 func (*QueryListQuestionsResponse) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *QueryListQuestionsResponse) GetScavengeQuestion() []*ScavengeQuestion {
+	if x != nil {
+		return x.ScavengeQuestion
+	}
+	return nil
+}
+
+func (x *QueryListQuestionsResponse) GetPagination() *v1beta1.PageResponse {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
 }
 
 type QueryShowQuestionRequest struct {
@@ -3983,6 +4763,8 @@ type QueryShowQuestionResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	ScavengeQuestion *ScavengeQuestion `protobuf:"bytes,1,opt,name=scavengeQuestion,proto3" json:"scavengeQuestion,omitempty"`
 }
 
 func (x *QueryShowQuestionResponse) Reset() {
@@ -4005,10 +4787,20 @@ func (*QueryShowQuestionResponse) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{5}
 }
 
+func (x *QueryShowQuestionResponse) GetScavengeQuestion() *ScavengeQuestion {
+	if x != nil {
+		return x.ScavengeQuestion
+	}
+	return nil
+}
+
 type QueryListCommitsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	// pagination defines an optional pagination for the request.
+	Pagination *v1beta1.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListCommitsRequest) Reset() {
@@ -4031,10 +4823,22 @@ func (*QueryListCommitsRequest) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{6}
 }
 
+func (x *QueryListCommitsRequest) GetPagination() *v1beta1.PageRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
 type QueryListCommitsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	// items holds all the commits
+	CommittedAnswer []*CommittedAnswer `protobuf:"bytes,1,rep,name=committedAnswer,proto3" json:"committedAnswer,omitempty"`
+	// pagination defines the pagination in the response.
+	Pagination *v1beta1.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
 func (x *QueryListCommitsResponse) Reset() {
@@ -4055,6 +4859,20 @@ func (*QueryListCommitsResponse) ProtoMessage() {}
 // Deprecated: Use QueryListCommitsResponse.ProtoReflect.Descriptor instead.
 func (*QueryListCommitsResponse) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *QueryListCommitsResponse) GetCommittedAnswer() []*CommittedAnswer {
+	if x != nil {
+		return x.CommittedAnswer
+	}
+	return nil
+}
+
+func (x *QueryListCommitsResponse) GetPagination() *v1beta1.PageResponse {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
 }
 
 type QueryShowCommitRequest struct {
@@ -4104,6 +4922,8 @@ type QueryShowCommitResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	CommittedAnswer *CommittedAnswer `protobuf:"bytes,1,opt,name=committedAnswer,proto3" json:"committedAnswer,omitempty"`
 }
 
 func (x *QueryShowCommitResponse) Reset() {
@@ -4126,6 +4946,13 @@ func (*QueryShowCommitResponse) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_query_proto_rawDescGZIP(), []int{9}
 }
 
+func (x *QueryShowCommitResponse) GetCommittedAnswer() *CommittedAnswer {
+	if x != nil {
+		return x.CommittedAnswer
+	}
+	return nil
+}
+
 var File_scavenge_scavenge_query_proto protoreflect.FileDescriptor
 
 var file_scavenge_scavenge_query_proto_rawDesc = []byte{
@@ -4141,92 +4968,137 @@ var file_scavenge_scavenge_query_proto_rawDesc = []byte{
 	0x65, 0x74, 0x61, 0x31, 0x2f, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f,
 	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61,
-	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x53, 0x0a, 0x13, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x12, 0x3c, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63,
-	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x42, 0x09, 0xc8,
-	0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x22, 0x1b, 0x0a, 0x19, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65,
-	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x1c, 0x0a,
-	0x1a, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69,
-	0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x3a, 0x0a, 0x18, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x1b, 0x0a, 0x19, 0x51, 0x75, 0x65, 0x72, 0x79,
-	0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x19, 0x0a, 0x17, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73,
-	0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22,
-	0x1a, 0x0a, 0x18, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x52, 0x0a, 0x16, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x52, 0x65,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x29, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x5f, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x1a, 0x28, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65,
+	0x6e, 0x67, 0x65, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x5f, 0x61, 0x6e,
+	0x73, 0x77, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x14, 0x0a, 0x12, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x22, 0x53, 0x0a, 0x13, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x3c, 0x0a, 0x06, 0x70, 0x61, 0x72, 0x61, 0x6d,
+	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x19, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
+	0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x42, 0x09, 0xc8, 0xde, 0x1f, 0x00, 0xa8, 0xe7, 0xb0, 0x2a, 0x01, 0x52, 0x06, 0x70,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x63, 0x0a, 0x19, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69,
+	0x73, 0x74, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e,
+	0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74,
+	0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x52, 0x0a,
+	0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xbc, 0x01, 0x0a, 0x1a, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x55, 0x0a, 0x10, 0x73, 0x63, 0x61,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73,
+	0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
+	0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x10,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x47, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61,
+	0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31,
+	0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70,
+	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x3a, 0x0a, 0x18, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
 	0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22,
-	0x19, 0x0a, 0x17, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xf7, 0x05, 0x0a, 0x05, 0x51,
-	0x75, 0x65, 0x72, 0x79, 0x12, 0x7a, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x25,
-	0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
-	0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
-	0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50,
-	0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x21, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
-	0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73,
-	0x12, 0x97, 0x01, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
-	0x6e, 0x73, 0x12, 0x2c, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63,
-	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74,
-	0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x2d, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76,
-	0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75,
-	0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
-	0x29, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x12, 0x21, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
-	0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x6c, 0x69, 0x73, 0x74,
-	0x5f, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0xa0, 0x01, 0x0a, 0x0c, 0x53,
-	0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2b, 0x2e, 0x73, 0x63,
-	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
-	0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2c, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65,
-	0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x35, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2f, 0x12, 0x2d,
-	0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
-	0x67, 0x65, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
-	0x2f, 0x7b, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x7d, 0x12, 0x8f, 0x01,
-	0x0a, 0x0b, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x12, 0x2a, 0x2e,
-	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
-	0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69,
-	0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x73, 0x63, 0x61, 0x76,
-	0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x27, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21, 0x12, 0x1f,
-	0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
-	0x67, 0x65, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x12,
-	0xa2, 0x01, 0x0a, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x12, 0x29,
-	0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
-	0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d,
-	0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x73, 0x63, 0x61, 0x76,
-	0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75,
+	0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x72, 0x0a, 0x19, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68,
+	0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x55, 0x0a, 0x10, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75,
+	0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x73,
+	0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
+	0x2e, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f,
+	0x6e, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x10, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x61, 0x0a, 0x17, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x46, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x26, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f,
+	0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e, 0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62,
+	0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xb7, 0x01, 0x0a,
+	0x18, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0f, 0x63, 0x6f, 0x6d,
+	0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x22, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63,
+	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64,
+	0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f, 0x63, 0x6f,
+	0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x12, 0x47, 0x0a,
+	0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x27, 0x2e, 0x63, 0x6f, 0x73, 0x6d, 0x6f, 0x73, 0x2e, 0x62, 0x61, 0x73, 0x65, 0x2e,
+	0x71, 0x75, 0x65, 0x72, 0x79, 0x2e, 0x76, 0x31, 0x62, 0x65, 0x74, 0x61, 0x31, 0x2e, 0x50, 0x61,
+	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x52, 0x0a, 0x16, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53,
+	0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x12, 0x1e, 0x0a, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x6d, 0x0a, 0x17, 0x51, 0x75,
 	0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x3d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x37, 0x12, 0x35, 0x2f,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x52, 0x0a, 0x0f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74,
+	0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22,
+	0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
+	0x67, 0x65, 0x2e, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77,
+	0x65, 0x72, 0x42, 0x04, 0xc8, 0xde, 0x1f, 0x00, 0x52, 0x0f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x32, 0xf7, 0x05, 0x0a, 0x05, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x12, 0x7a, 0x0a, 0x06, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x25, 0x2e,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x21, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1b, 0x12, 0x19, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12,
+	0x97, 0x01, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x12, 0x2c, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51,
+	0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x2d, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65,
+	0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x51, 0x75, 0x65,
+	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x29,
+	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x23, 0x12, 0x21, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x5f,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0xa0, 0x01, 0x0a, 0x0c, 0x53, 0x68,
+	0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2b, 0x2e, 0x73, 0x63, 0x61,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2c, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
+	0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x53, 0x68, 0x6f, 0x77, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x35, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2f, 0x12, 0x2d, 0x2f,
 	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
-	0x65, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x2f, 0x7b, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x7d, 0x2f, 0x7b, 0x63, 0x72, 0x65, 0x61,
-	0x74, 0x6f, 0x72, 0x7d, 0x42, 0xa8, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x63, 0x61,
-	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x42, 0x0a,
-	0x51, 0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x73, 0x63,
-	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65,
-	0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0xa2, 0x02, 0x03, 0x53,
-	0x53, 0x58, 0xaa, 0x02, 0x11, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x53, 0x63,
-	0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0xca, 0x02, 0x11, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
-	0x65, 0x5c, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0xe2, 0x02, 0x1d, 0x53, 0x63, 0x61,
-	0x76, 0x65, 0x6e, 0x67, 0x65, 0x5c, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x5c, 0x47,
-	0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x12, 0x53, 0x63, 0x61,
-	0x76, 0x65, 0x6e, 0x67, 0x65, 0x3a, 0x3a, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x2f,
+	0x7b, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x7d, 0x12, 0x8f, 0x01, 0x0a,
+	0x0b, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x12, 0x2a, 0x2e, 0x73,
+	0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
+	0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74,
+	0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65,
+	0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x4c, 0x69, 0x73, 0x74, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x27, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x21, 0x12, 0x1f, 0x2f,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x2f, 0x6c, 0x69, 0x73, 0x74, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x73, 0x12, 0xa2,
+	0x01, 0x0a, 0x0a, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x12, 0x29, 0x2e,
+	0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67,
+	0x65, 0x2e, 0x51, 0x75, 0x65, 0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69,
+	0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65,
+	0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x51, 0x75, 0x65,
+	0x72, 0x79, 0x53, 0x68, 0x6f, 0x77, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x3d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x37, 0x12, 0x35, 0x2f, 0x73,
+	0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
+	0x2f, 0x73, 0x68, 0x6f, 0x77, 0x5f, 0x63, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x2f, 0x7b, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x7d, 0x2f, 0x7b, 0x63, 0x72, 0x65, 0x61, 0x74,
+	0x6f, 0x72, 0x7d, 0x42, 0xa8, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x63, 0x61, 0x76,
+	0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x42, 0x0a, 0x51,
+	0x75, 0x65, 0x72, 0x79, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x73, 0x63, 0x61,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
+	0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0xa2, 0x02, 0x03, 0x53, 0x53,
+	0x58, 0xaa, 0x02, 0x11, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x53, 0x63, 0x61,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0xca, 0x02, 0x11, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65,
+	0x5c, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0xe2, 0x02, 0x1d, 0x53, 0x63, 0x61, 0x76,
+	0x65, 0x6e, 0x67, 0x65, 0x5c, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x12, 0x53, 0x63, 0x61, 0x76,
+	0x65, 0x6e, 0x67, 0x65, 0x3a, 0x3a, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4254,24 +5126,36 @@ var file_scavenge_scavenge_query_proto_goTypes = []interface{}{
 	(*QueryShowCommitRequest)(nil),     // 8: scavenge.scavenge.QueryShowCommitRequest
 	(*QueryShowCommitResponse)(nil),    // 9: scavenge.scavenge.QueryShowCommitResponse
 	(*Params)(nil),                     // 10: scavenge.scavenge.Params
+	(*v1beta1.PageRequest)(nil),        // 11: cosmos.base.query.v1beta1.PageRequest
+	(*ScavengeQuestion)(nil),           // 12: scavenge.scavenge.ScavengeQuestion
+	(*v1beta1.PageResponse)(nil),       // 13: cosmos.base.query.v1beta1.PageResponse
+	(*CommittedAnswer)(nil),            // 14: scavenge.scavenge.CommittedAnswer
 }
 var file_scavenge_scavenge_query_proto_depIdxs = []int32{
 	10, // 0: scavenge.scavenge.QueryParamsResponse.params:type_name -> scavenge.scavenge.Params
-	0,  // 1: scavenge.scavenge.Query.Params:input_type -> scavenge.scavenge.QueryParamsRequest
-	2,  // 2: scavenge.scavenge.Query.ListQuestions:input_type -> scavenge.scavenge.QueryListQuestionsRequest
-	4,  // 3: scavenge.scavenge.Query.ShowQuestion:input_type -> scavenge.scavenge.QueryShowQuestionRequest
-	6,  // 4: scavenge.scavenge.Query.ListCommits:input_type -> scavenge.scavenge.QueryListCommitsRequest
-	8,  // 5: scavenge.scavenge.Query.ShowCommit:input_type -> scavenge.scavenge.QueryShowCommitRequest
-	1,  // 6: scavenge.scavenge.Query.Params:output_type -> scavenge.scavenge.QueryParamsResponse
-	3,  // 7: scavenge.scavenge.Query.ListQuestions:output_type -> scavenge.scavenge.QueryListQuestionsResponse
-	5,  // 8: scavenge.scavenge.Query.ShowQuestion:output_type -> scavenge.scavenge.QueryShowQuestionResponse
-	7,  // 9: scavenge.scavenge.Query.ListCommits:output_type -> scavenge.scavenge.QueryListCommitsResponse
-	9,  // 10: scavenge.scavenge.Query.ShowCommit:output_type -> scavenge.scavenge.QueryShowCommitResponse
-	6,  // [6:11] is the sub-list for method output_type
-	1,  // [1:6] is the sub-list for method input_type
-	1,  // [1:1] is the sub-list for extension type_name
-	1,  // [1:1] is the sub-list for extension extendee
-	0,  // [0:1] is the sub-list for field type_name
+	11, // 1: scavenge.scavenge.QueryListQuestionsRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	12, // 2: scavenge.scavenge.QueryListQuestionsResponse.scavengeQuestion:type_name -> scavenge.scavenge.ScavengeQuestion
+	13, // 3: scavenge.scavenge.QueryListQuestionsResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	12, // 4: scavenge.scavenge.QueryShowQuestionResponse.scavengeQuestion:type_name -> scavenge.scavenge.ScavengeQuestion
+	11, // 5: scavenge.scavenge.QueryListCommitsRequest.pagination:type_name -> cosmos.base.query.v1beta1.PageRequest
+	14, // 6: scavenge.scavenge.QueryListCommitsResponse.committedAnswer:type_name -> scavenge.scavenge.CommittedAnswer
+	13, // 7: scavenge.scavenge.QueryListCommitsResponse.pagination:type_name -> cosmos.base.query.v1beta1.PageResponse
+	14, // 8: scavenge.scavenge.QueryShowCommitResponse.committedAnswer:type_name -> scavenge.scavenge.CommittedAnswer
+	0,  // 9: scavenge.scavenge.Query.Params:input_type -> scavenge.scavenge.QueryParamsRequest
+	2,  // 10: scavenge.scavenge.Query.ListQuestions:input_type -> scavenge.scavenge.QueryListQuestionsRequest
+	4,  // 11: scavenge.scavenge.Query.ShowQuestion:input_type -> scavenge.scavenge.QueryShowQuestionRequest
+	6,  // 12: scavenge.scavenge.Query.ListCommits:input_type -> scavenge.scavenge.QueryListCommitsRequest
+	8,  // 13: scavenge.scavenge.Query.ShowCommit:input_type -> scavenge.scavenge.QueryShowCommitRequest
+	1,  // 14: scavenge.scavenge.Query.Params:output_type -> scavenge.scavenge.QueryParamsResponse
+	3,  // 15: scavenge.scavenge.Query.ListQuestions:output_type -> scavenge.scavenge.QueryListQuestionsResponse
+	5,  // 16: scavenge.scavenge.Query.ShowQuestion:output_type -> scavenge.scavenge.QueryShowQuestionResponse
+	7,  // 17: scavenge.scavenge.Query.ListCommits:output_type -> scavenge.scavenge.QueryListCommitsResponse
+	9,  // 18: scavenge.scavenge.Query.ShowCommit:output_type -> scavenge.scavenge.QueryShowCommitResponse
+	14, // [14:19] is the sub-list for method output_type
+	9,  // [9:14] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_scavenge_scavenge_query_proto_init() }
@@ -4280,6 +5164,8 @@ func file_scavenge_scavenge_query_proto_init() {
 		return
 	}
 	file_scavenge_scavenge_params_proto_init()
+	file_scavenge_scavenge_scavenge_question_proto_init()
+	file_scavenge_scavenge_committed_answer_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_scavenge_scavenge_query_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryParamsRequest); i {

@@ -62,3 +62,32 @@ func GetScavengeQuestionIDBytes(id uint64) []byte {
 	binary.BigEndian.PutUint64(bz, id)
 	return bz
 }
+
+// GetAllScavengeQuestion returns all scavenge questions
+func (k Keeper) GetAllScavengeQuestion(ctx sdk.Context) (list []types.ScavengeQuestion) {
+	store := prefix.NewStore(k.getStore(ctx), types.KeyPrefix(types.ScavengeKey))
+	iterator := store.Iterator(nil, nil)
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.ScavengeQuestion
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		list = append(list, val)
+	}
+
+	return list
+}
+
+func (k Keeper) GetAllCommittedAnswer(ctx sdk.Context) (list []types.CommittedAnswer) {
+	store := prefix.NewStore(k.getStore(ctx), types.KeyPrefix(types.CommitKeyPrefix))
+	iterator := store.Iterator(nil, nil)
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.CommittedAnswer
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		list = append(list, val)
+	}
+
+	return list
+}

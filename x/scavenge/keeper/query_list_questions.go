@@ -15,10 +15,10 @@ func (k Keeper) ListQuestions(goCtx context.Context, req *types.QueryListQuestio
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	ctx := sdk.UnwrapSDKContext(goCtx)
+	sdkCtx := sdk.UnwrapSDKContext(goCtx)
+	questions := k.GetAllScavengeQuestion(sdkCtx)
 
-	// TODO: Process the query
-	_ = ctx
-
-	return &types.QueryListQuestionsResponse{}, nil
+	return &types.QueryListQuestionsResponse{
+		ScavengeQuestion: questions,
+	}, nil
 }

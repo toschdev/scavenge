@@ -7,6 +7,8 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "scavenge/scavenge/params.proto";
+import "scavenge/scavenge/scavenge_question.proto";
+import "scavenge/scavenge/committed_answer.proto";
 
 option go_package = "scavenge/x/scavenge/types";
 
@@ -53,24 +55,44 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
 
-message QueryListQuestionsRequest {}
+// QueryListQuestionsRequest is request type for the Query/ListQuestions RPC method
+message QueryListQuestionsRequest {
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
 
-message QueryListQuestionsResponse {}
+message QueryListQuestionsResponse {
+  // items holds all the scavenge questions
+  repeated ScavengeQuestion scavengeQuestion = 1 [(gogoproto.nullable) = false];
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
 
 message QueryShowQuestionRequest {
   uint64 questionId = 1;
 }
 
-message QueryShowQuestionResponse {}
+message QueryShowQuestionResponse {
+  ScavengeQuestion scavengeQuestion = 1 [(gogoproto.nullable) = false];
+}
 
-message QueryListCommitsRequest {}
+message QueryListCommitsRequest {
+  // pagination defines an optional pagination for the request.
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
 
-message QueryListCommitsResponse {}
+message QueryListCommitsResponse {
+  // items holds all the commits
+  repeated CommittedAnswer committedAnswer = 1 [(gogoproto.nullable) = false];
+  // pagination defines the pagination in the response.
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
 
 message QueryShowCommitRequest {
   uint64 questionId = 1;
-  string creator    = 2;
+  string creator = 2;
 }
 
-message QueryShowCommitResponse {}
-
+message QueryShowCommitResponse {
+  CommittedAnswer committedAnswer = 1 [(gogoproto.nullable) = false];
+}
