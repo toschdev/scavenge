@@ -1,0 +1,14 @@
+syntax = "proto3";
+package scavenge.scavenge;
+
+option go_package = "scavenge/x/scavenge/types";
+
+message ScavengeQuestion {
+  
+  string creator = 1; 
+  string question = 2; 
+  string encryptedAnswer = 3; 
+  uint64 bounty = 4; 
+  bool completed = 5; 
+  string winner = 6; 
+}
