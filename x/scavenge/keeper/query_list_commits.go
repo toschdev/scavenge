@@ -17,8 +17,9 @@ func (k Keeper) ListCommits(goCtx context.Context, req *types.QueryListCommitsRe
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	commits := k.GetAllCommittedAnswer(ctx)
 
-	return &types.QueryListCommitsResponse{}, nil
+	return &types.QueryListCommitsResponse{
+		CommittedAnswer: commits,
+	}, nil
 }

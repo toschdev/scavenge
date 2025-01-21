@@ -17,8 +17,12 @@ func (k Keeper) ShowCommit(goCtx context.Context, req *types.QueryShowCommitRequ
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	commit, found := k.GetCommittedAnswer(ctx, req.QuestionId, req.Creator)
+	if !found {
+		return nil, status.Error(codes.NotFound, "commit not found")
+	}
 
-	return &types.QueryShowCommitResponse{}, nil
+	return &types.QueryShowCommitResponse{
+		CommittedAnswer: commit,
+	}, nil
 }

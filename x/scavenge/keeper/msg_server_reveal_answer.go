@@ -17,48 +17,53 @@ import (
 func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswer) (*types.MsgRevealAnswerResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// Check if the question exists and is not completed
+	// First verify the commit exists by recreating the hash of solution + creator
+	solutionScavengerBytes := []byte(msg.PlainText + msg.Creator)
+	solutionScavengerHash := sha256.Sum256(solutionScavengerBytes)
+	commitHash := hex.EncodeToString(solutionScavengerHash[:])
+
+	// Get the commit
+	commit, found := k.GetCommittedAnswer(ctx, msg.QuestionId, msg.Creator)
+	if !found {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "no commit found: must commit before reveal")
+	}
+
+	// Verify the hash matches their commit
+	if commitHash != commit.HashAnswer {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "committed hash does not match")
+	}
+
+	// Now hash just the solution to find the matching question
+	solutionHash := sha256.Sum256([]byte(msg.PlainText))
+	solutionHashString := hex.EncodeToString(solutionHash[:])
+
+	// Get the question
 	question, found := k.GetScavengeQuestion(ctx, msg.QuestionId)
 	if !found {
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, "question not found")
 	}
-	if question.Completed {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "question already completed")
-	}
 
-	// Check if a commit exists
-	commit, found := k.GetCommittedAnswer(ctx, msg.QuestionId, msg.Creator)
-	if !found {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "commit not found: must commit before reveal")
-	}
-
-	// Verify the hash of the answer matches the commit
-	answer := msg.PlainText + msg.Creator
-	answerHash := sha256.Sum256([]byte(answer))
-	hashedAnswer := hex.EncodeToString(answerHash[:])
-	if hashedAnswer != commit.HashAnswer {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "submitted answer hash does not match commit")
-	}
-
-	// Verify the answer is correct
-	solutionHash := sha256.Sum256([]byte(msg.PlainText))
-	solutionHashString := hex.EncodeToString(solutionHash[:])
+	// Verify the solution hash matches the question's encrypted answer
 	if solutionHashString != question.EncryptedAnswer {
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "incorrect answer")
 	}
 
-	// Send the bounty to the winner
+	if question.Completed {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "question already completed")
+	}
+
+	// Award the bounty
 	winner, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid winner address")
 	}
 
-	coins := sdk.NewCoins(sdk.NewCoin("stake", sdkmath.NewInt(int64(question.Bounty))))
+	coins := sdk.NewCoins(sdk.NewCoin("token", sdkmath.NewInt(int64(question.Bounty))))
 	if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, winner, coins); err != nil {
-		return nil, errorsmod.Wrap(err, "failed to send bounty to winner")
+		return nil, errorsmod.Wrap(err, "failed to send bounty")
 	}
 
-	// Update the question as completed
+	// Update the question
 	question.Completed = true
 	question.Winner = msg.Creator
 	k.SetScavengeQuestion(ctx, question)
