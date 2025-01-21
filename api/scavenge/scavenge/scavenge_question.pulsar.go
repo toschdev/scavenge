@@ -14,6 +14,7 @@ import (
 
 var (
 	md_ScavengeQuestion                 protoreflect.MessageDescriptor
+	fd_ScavengeQuestion_id              protoreflect.FieldDescriptor
 	fd_ScavengeQuestion_creator         protoreflect.FieldDescriptor
 	fd_ScavengeQuestion_question        protoreflect.FieldDescriptor
 	fd_ScavengeQuestion_encryptedAnswer protoreflect.FieldDescriptor
@@ -25,6 +26,7 @@ var (
 func init() {
 	file_scavenge_scavenge_scavenge_question_proto_init()
 	md_ScavengeQuestion = File_scavenge_scavenge_scavenge_question_proto.Messages().ByName("ScavengeQuestion")
+	fd_ScavengeQuestion_id = md_ScavengeQuestion.Fields().ByName("id")
 	fd_ScavengeQuestion_creator = md_ScavengeQuestion.Fields().ByName("creator")
 	fd_ScavengeQuestion_question = md_ScavengeQuestion.Fields().ByName("question")
 	fd_ScavengeQuestion_encryptedAnswer = md_ScavengeQuestion.Fields().ByName("encryptedAnswer")
@@ -98,6 +100,12 @@ func (x *fastReflection_ScavengeQuestion) Interface() protoreflect.ProtoMessage 
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_ScavengeQuestion) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Id)
+		if !f(fd_ScavengeQuestion_id, value) {
+			return
+		}
+	}
 	if x.Creator != "" {
 		value := protoreflect.ValueOfString(x.Creator)
 		if !f(fd_ScavengeQuestion_creator, value) {
@@ -149,6 +157,8 @@ func (x *fastReflection_ScavengeQuestion) Range(f func(protoreflect.FieldDescrip
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_ScavengeQuestion) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		return x.Id != uint64(0)
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		return x.Creator != ""
 	case "scavenge.scavenge.ScavengeQuestion.question":
@@ -177,6 +187,8 @@ func (x *fastReflection_ScavengeQuestion) Has(fd protoreflect.FieldDescriptor) b
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ScavengeQuestion) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		x.Id = uint64(0)
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		x.Creator = ""
 	case "scavenge.scavenge.ScavengeQuestion.question":
@@ -205,6 +217,9 @@ func (x *fastReflection_ScavengeQuestion) Clear(fd protoreflect.FieldDescriptor)
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_ScavengeQuestion) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		value := x.Id
+		return protoreflect.ValueOfUint64(value)
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		value := x.Creator
 		return protoreflect.ValueOfString(value)
@@ -243,6 +258,8 @@ func (x *fastReflection_ScavengeQuestion) Get(descriptor protoreflect.FieldDescr
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ScavengeQuestion) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		x.Id = value.Uint()
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		x.Creator = value.Interface().(string)
 	case "scavenge.scavenge.ScavengeQuestion.question":
@@ -275,6 +292,8 @@ func (x *fastReflection_ScavengeQuestion) Set(fd protoreflect.FieldDescriptor, v
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_ScavengeQuestion) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		panic(fmt.Errorf("field id of message scavenge.scavenge.ScavengeQuestion is not mutable"))
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		panic(fmt.Errorf("field creator of message scavenge.scavenge.ScavengeQuestion is not mutable"))
 	case "scavenge.scavenge.ScavengeQuestion.question":
@@ -300,6 +319,8 @@ func (x *fastReflection_ScavengeQuestion) Mutable(fd protoreflect.FieldDescripto
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_ScavengeQuestion) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.ScavengeQuestion.id":
+		return protoreflect.ValueOfUint64(uint64(0))
 	case "scavenge.scavenge.ScavengeQuestion.creator":
 		return protoreflect.ValueOfString("")
 	case "scavenge.scavenge.ScavengeQuestion.question":
@@ -381,6 +402,9 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
 		l = len(x.Creator)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
@@ -437,7 +461,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 			copy(dAtA[i:], x.Winner)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Winner)))
 			i--
-			dAtA[i] = 0x32
+			dAtA[i] = 0x3a
 		}
 		if x.Completed {
 			i--
@@ -447,33 +471,38 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 				dAtA[i] = 0
 			}
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x30
 		}
 		if x.Bounty != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Bounty))
 			i--
-			dAtA[i] = 0x20
+			dAtA[i] = 0x28
 		}
 		if len(x.EncryptedAnswer) > 0 {
 			i -= len(x.EncryptedAnswer)
 			copy(dAtA[i:], x.EncryptedAnswer)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.EncryptedAnswer)))
 			i--
-			dAtA[i] = 0x1a
+			dAtA[i] = 0x22
 		}
 		if len(x.Question) > 0 {
 			i -= len(x.Question)
 			copy(dAtA[i:], x.Question)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Question)))
 			i--
-			dAtA[i] = 0x12
+			dAtA[i] = 0x1a
 		}
 		if len(x.Creator) > 0 {
 			i -= len(x.Creator)
 			copy(dAtA[i:], x.Creator)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
 			i--
-			dAtA[i] = 0xa
+			dAtA[i] = 0x12
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -525,6 +554,25 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 			}
 			switch fieldNum {
 			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 2:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
 				}
@@ -556,7 +604,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 				}
 				x.Creator = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 2:
+			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Question", wireType)
 				}
@@ -588,7 +636,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 				}
 				x.Question = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 3:
+			case 4:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field EncryptedAnswer", wireType)
 				}
@@ -620,7 +668,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 				}
 				x.EncryptedAnswer = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
-			case 4:
+			case 5:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Bounty", wireType)
 				}
@@ -639,7 +687,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 						break
 					}
 				}
-			case 5:
+			case 6:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Completed", wireType)
 				}
@@ -659,7 +707,7 @@ func (x *fastReflection_ScavengeQuestion) ProtoMethods() *protoiface.Methods {
 					}
 				}
 				x.Completed = bool(v != 0)
-			case 6:
+			case 7:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Winner", wireType)
 				}
@@ -744,12 +792,13 @@ type ScavengeQuestion struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Creator         string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Question        string `protobuf:"bytes,2,opt,name=question,proto3" json:"question,omitempty"`
-	EncryptedAnswer string `protobuf:"bytes,3,opt,name=encryptedAnswer,proto3" json:"encryptedAnswer,omitempty"`
-	Bounty          uint64 `protobuf:"varint,4,opt,name=bounty,proto3" json:"bounty,omitempty"`
-	Completed       bool   `protobuf:"varint,5,opt,name=completed,proto3" json:"completed,omitempty"`
-	Winner          string `protobuf:"bytes,6,opt,name=winner,proto3" json:"winner,omitempty"`
+	Id              uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Creator         string `protobuf:"bytes,2,opt,name=creator,proto3" json:"creator,omitempty"`
+	Question        string `protobuf:"bytes,3,opt,name=question,proto3" json:"question,omitempty"`
+	EncryptedAnswer string `protobuf:"bytes,4,opt,name=encryptedAnswer,proto3" json:"encryptedAnswer,omitempty"`
+	Bounty          uint64 `protobuf:"varint,5,opt,name=bounty,proto3" json:"bounty,omitempty"`
+	Completed       bool   `protobuf:"varint,6,opt,name=completed,proto3" json:"completed,omitempty"`
+	Winner          string `protobuf:"bytes,7,opt,name=winner,proto3" json:"winner,omitempty"`
 }
 
 func (x *ScavengeQuestion) Reset() {
@@ -770,6 +819,13 @@ func (*ScavengeQuestion) ProtoMessage() {}
 // Deprecated: Use ScavengeQuestion.ProtoReflect.Descriptor instead.
 func (*ScavengeQuestion) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_scavenge_question_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ScavengeQuestion) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 func (x *ScavengeQuestion) GetCreator() string {
@@ -820,19 +876,20 @@ var file_scavenge_scavenge_scavenge_question_proto_rawDesc = []byte{
 	0x0a, 0x29, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65,
 	0x6e, 0x67, 0x65, 0x2f, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x5f, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11, 0x73, 0x63, 0x61,
-	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x22, 0xc0,
+	0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x22, 0xd0,
 	0x01, 0x0a, 0x10, 0x53, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74,
-	0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01,
+	0x69, 0x6f, 0x6e, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x02,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1a, 0x0a,
-	0x08, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x08, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x28, 0x0a, 0x0f, 0x65, 0x6e, 0x63,
-	0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01,
+	0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x0f, 0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73,
-	0x77, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x6f, 0x75, 0x6e, 0x74, 0x79, 0x18, 0x04, 0x20,
+	0x77, 0x65, 0x72, 0x12, 0x16, 0x0a, 0x06, 0x62, 0x6f, 0x75, 0x6e, 0x74, 0x79, 0x18, 0x05, 0x20,
 	0x01, 0x28, 0x04, 0x52, 0x06, 0x62, 0x6f, 0x75, 0x6e, 0x74, 0x79, 0x12, 0x1c, 0x0a, 0x09, 0x63,
-	0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09,
+	0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09,
 	0x63, 0x6f, 0x6d, 0x70, 0x6c, 0x65, 0x74, 0x65, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x77, 0x69, 0x6e,
-	0x6e, 0x65, 0x72, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x77, 0x69, 0x6e, 0x6e, 0x65,
+	0x6e, 0x65, 0x72, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x77, 0x69, 0x6e, 0x6e, 0x65,
 	0x72, 0x42, 0xb3, 0x01, 0x0a, 0x15, 0x63, 0x6f, 0x6d, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e,
 	0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x42, 0x15, 0x53, 0x63, 0x61,
 	0x76, 0x65, 0x6e, 0x67, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f,

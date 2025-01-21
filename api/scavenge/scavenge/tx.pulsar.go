@@ -1468,12 +1468,14 @@ func (x *fastReflection_MsgCreateQuestion) ProtoMethods() *protoiface.Methods {
 }
 
 var (
-	md_MsgCreateQuestionResponse protoreflect.MessageDescriptor
+	md_MsgCreateQuestionResponse    protoreflect.MessageDescriptor
+	fd_MsgCreateQuestionResponse_id protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_tx_proto_init()
 	md_MsgCreateQuestionResponse = File_scavenge_scavenge_tx_proto.Messages().ByName("MsgCreateQuestionResponse")
+	fd_MsgCreateQuestionResponse_id = md_MsgCreateQuestionResponse.Fields().ByName("id")
 }
 
 var _ protoreflect.Message = (*fastReflection_MsgCreateQuestionResponse)(nil)
@@ -1541,6 +1543,12 @@ func (x *fastReflection_MsgCreateQuestionResponse) Interface() protoreflect.Prot
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_MsgCreateQuestionResponse) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Id != uint64(0) {
+		value := protoreflect.ValueOfUint64(x.Id)
+		if !f(fd_MsgCreateQuestionResponse_id, value) {
+			return
+		}
+	}
 }
 
 // Has reports whether a field is populated.
@@ -1556,6 +1564,8 @@ func (x *fastReflection_MsgCreateQuestionResponse) Range(f func(protoreflect.Fie
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_MsgCreateQuestionResponse) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		return x.Id != uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1572,6 +1582,8 @@ func (x *fastReflection_MsgCreateQuestionResponse) Has(fd protoreflect.FieldDesc
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateQuestionResponse) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		x.Id = uint64(0)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1588,6 +1600,9 @@ func (x *fastReflection_MsgCreateQuestionResponse) Clear(fd protoreflect.FieldDe
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_MsgCreateQuestionResponse) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		value := x.Id
+		return protoreflect.ValueOfUint64(value)
 	default:
 		if descriptor.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1608,6 +1623,8 @@ func (x *fastReflection_MsgCreateQuestionResponse) Get(descriptor protoreflect.F
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateQuestionResponse) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		x.Id = value.Uint()
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1628,6 +1645,8 @@ func (x *fastReflection_MsgCreateQuestionResponse) Set(fd protoreflect.FieldDesc
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_MsgCreateQuestionResponse) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		panic(fmt.Errorf("field id of message scavenge.scavenge.MsgCreateQuestionResponse is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1641,6 +1660,8 @@ func (x *fastReflection_MsgCreateQuestionResponse) Mutable(fd protoreflect.Field
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_MsgCreateQuestionResponse) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.MsgCreateQuestionResponse.id":
+		return protoreflect.ValueOfUint64(uint64(0))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.MsgCreateQuestionResponse"))
@@ -1710,6 +1731,9 @@ func (x *fastReflection_MsgCreateQuestionResponse) ProtoMethods() *protoiface.Me
 		var n int
 		var l int
 		_ = l
+		if x.Id != 0 {
+			n += 1 + runtime.Sov(uint64(x.Id))
+		}
 		if x.unknownFields != nil {
 			n += len(x.unknownFields)
 		}
@@ -1738,6 +1762,11 @@ func (x *fastReflection_MsgCreateQuestionResponse) ProtoMethods() *protoiface.Me
 		if x.unknownFields != nil {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
+		}
+		if x.Id != 0 {
+			i = runtime.EncodeVarint(dAtA, i, uint64(x.Id))
+			i--
+			dAtA[i] = 0x8
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -1788,6 +1817,25 @@ func (x *fastReflection_MsgCreateQuestionResponse) ProtoMethods() *protoiface.Me
 				return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: MsgCreateQuestionResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 			}
 			switch fieldNum {
+			case 1:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+				}
+				x.Id = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.Id |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
 			default:
 				iNdEx = preIndex
 				skippy, err := runtime.Skip(dAtA[iNdEx:])
@@ -4701,6 +4749,8 @@ type MsgCreateQuestionResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
+
+	Id uint64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *MsgCreateQuestionResponse) Reset() {
@@ -4721,6 +4771,13 @@ func (*MsgCreateQuestionResponse) ProtoMessage() {}
 // Deprecated: Use MsgCreateQuestionResponse.ProtoReflect.Descriptor instead.
 func (*MsgCreateQuestionResponse) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_tx_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MsgCreateQuestionResponse) GetId() uint64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
 }
 
 type MsgCommitAnswer struct {
@@ -4999,9 +5056,10 @@ var file_scavenge_scavenge_tx_proto_rawDesc = []byte{
 	0x65, 0x6e, 0x63, 0x72, 0x79, 0x70, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x12,
 	0x16, 0x0a, 0x06, 0x62, 0x6f, 0x75, 0x6e, 0x74, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52,
 	0x06, 0x62, 0x6f, 0x75, 0x6e, 0x74, 0x79, 0x3a, 0x0c, 0x82, 0xe7, 0xb0, 0x2a, 0x07, 0x63, 0x72,
-	0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x1b, 0x0a, 0x19, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
+	0x65, 0x61, 0x74, 0x6f, 0x72, 0x22, 0x2b, 0x0a, 0x19, 0x4d, 0x73, 0x67, 0x43, 0x72, 0x65, 0x61,
 	0x74, 0x65, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x22, 0x79, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x41,
+	0x73, 0x65, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x79, 0x0a, 0x0f, 0x4d, 0x73, 0x67, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x41,
 	0x6e, 0x73, 0x77, 0x65, 0x72, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12,
 	0x1e, 0x0a, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x02, 0x20,

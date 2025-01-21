@@ -48,7 +48,9 @@ message MsgCreateQuestion {
   uint64 bounty          = 4;
 }
 
-message MsgCreateQuestionResponse {}
+message MsgCreateQuestionResponse {
+  uint64 id = 1;
+}
 
 message MsgCommitAnswer {
   option (cosmos.msg.v1.signer) = "creator";

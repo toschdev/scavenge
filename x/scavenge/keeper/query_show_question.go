@@ -17,8 +17,12 @@ func (k Keeper) ShowQuestion(goCtx context.Context, req *types.QueryShowQuestion
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Process the query
-	_ = ctx
+	question, found := k.GetScavengeQuestion(ctx, req.QuestionId)
+	if !found {
+		return nil, status.Error(codes.NotFound, "question not found")
+	}
 
-	return &types.QueryShowQuestionResponse{}, nil
+	return &types.QueryShowQuestionResponse{
+		ScavengeQuestion: question,
+	}, nil
 }

@@ -14,8 +14,12 @@ import (
 func (k msgServer) CreateQuestion(goCtx context.Context, msg *types.MsgCreateQuestion) (*types.MsgCreateQuestionResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	// Get the next question ID
+	count := k.GetScavengeQuestionCount(ctx)
+
 	// Create a new scavenge question
 	question := types.ScavengeQuestion{
+		Id:              count,
 		Creator:         msg.Creator,
 		Question:        msg.Question,
 		EncryptedAnswer: msg.EncryptedAnswer,
@@ -36,6 +40,9 @@ func (k msgServer) CreateQuestion(goCtx context.Context, msg *types.MsgCreateQue
 	}
 
 	k.SetScavengeQuestion(ctx, question)
+	k.SetScavengeQuestionCount(ctx, count+1)
 
-	return &types.MsgCreateQuestionResponse{}, nil
+	return &types.MsgCreateQuestionResponse{
+		Id: count,
+	}, nil
 }
