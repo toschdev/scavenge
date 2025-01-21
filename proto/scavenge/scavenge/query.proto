@@ -30,6 +30,12 @@ service Query {
     option (google.api.http).get = "/scavenge/scavenge/show_question/{questionId}";
   
   }
+  
+  // Queries a list of ListCommits items.
+  rpc ListCommits (QueryListCommitsRequest) returns (QueryListCommitsResponse) {
+    option (google.api.http).get = "/scavenge/scavenge/list_commits";
+  
+  }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
@@ -50,4 +56,8 @@ message QueryShowQuestionRequest {
 }
 
 message QueryShowQuestionResponse {}
+
+message QueryListCommitsRequest {}
+
+message QueryListCommitsResponse {}
 
