@@ -13,6 +13,32 @@ ignite chain serve
 
 Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
 
+## Scavenge Hunt
+
+Example walkthrough
+
+```bash
+# Create New Scavenge
+scavenged tx scavenge create-question "I have cities, but no houses. I have mountains, but no trees. I have water, but no fish. I have roads, but no cars. What am I?" "60be9861750facbfad8758254a2f76c0cfe78d54459a3bc187d49b1401fcd8e8" 100 --from alice --chain-id scavenge
+
+
+# Queries
+scavenged q scavenge show-question 0
+
+scavenged q scavenge list-questions
+
+# Commit Answer
+scavenged tx scavenge commit-answer 0 --from bob --chain-id scavenge
+
+# Queries
+scavenged q scavenge show-commit 0
+
+scavenged q scavenge list-commits
+
+# Reveal Answer
+scavenged tx scavenge reveal-answer 0 map --from bob --chain-id scavenge
+```
+
 ### Web Frontend
 
 Additionally, Ignite CLI offers both Vue and React options for frontend scaffolding:
