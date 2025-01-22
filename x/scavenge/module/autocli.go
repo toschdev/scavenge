@@ -64,15 +64,15 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CommitAnswer",
-					Use:            "commit-answer [question-id] [hash-answer]",
+					Use:            "commit-answer [question-id]",
 					Short:          "Send a commit-answer tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}, {ProtoField: "hashAnswer"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}},
 				},
 				{
 					RpcMethod:      "RevealAnswer",
-					Use:            "reveal-answer [question-id] [answer] [plain-text]",
+					Use:            "reveal-answer [question-id] [answer-plain-text]",
 					Short:          "Send a reveal-answer tx",
-					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}, {ProtoField: "answer"}, {ProtoField: "plainText"}},
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "questionId"}, {ProtoField: "plainText"}},
 				},
 				{
 					RpcMethod:      "CompleteQuestion",

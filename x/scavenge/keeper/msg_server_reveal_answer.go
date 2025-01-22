@@ -18,7 +18,11 @@ func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswe
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// First verify the commit exists by recreating the hash of solution + creator
-	solutionScavengerBytes := []byte(msg.PlainText + msg.Creator)
+	plainTextToHash := []byte(msg.PlainText)
+	plainTextSha := sha256.Sum256(plainTextToHash)
+	encodedPlainText := hex.EncodeToString(plainTextSha[:])
+
+	solutionScavengerBytes := []byte(encodedPlainText + msg.Creator)
 	solutionScavengerHash := sha256.Sum256(solutionScavengerBytes)
 	commitHash := hex.EncodeToString(solutionScavengerHash[:])
 
@@ -30,7 +34,7 @@ func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswe
 
 	// Verify the hash matches their commit
 	if commitHash != commit.HashAnswer {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "committed hash does not match")
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "committed hash does not match: "+commitHash)
 	}
 
 	// Now hash just the solution to find the matching question
@@ -58,7 +62,7 @@ func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswe
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidAddress, "invalid winner address")
 	}
 
-	coins := sdk.NewCoins(sdk.NewCoin("token", sdkmath.NewInt(int64(question.Bounty))))
+	coins := sdk.NewCoins(sdk.NewCoin(types.ChainDenom, sdkmath.NewInt(int64(question.Bounty))))
 	if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, winner, coins); err != nil {
 		return nil, errorsmod.Wrap(err, "failed to send bounty")
 	}
