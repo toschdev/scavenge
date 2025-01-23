@@ -18,6 +18,13 @@ const (
 	ScavengeKey      = "Scavenge/value/"
 	ScavengeCountKey = "Scavenge/count/"
 	CommitKeyPrefix  = "Commit/value/"
+
+	AttributeKeyQuestionId = "question_id"
+	AttributeKeyCreator    = "creator"
+	AttributeKeyBounty     = "bounty"
+	AttributeKeyCommitter  = "committer"
+	AttributeKeyCommitHash = "commit_hash"
+	AttributeKeyWinner     = "winner"
 )
 
 var (

@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"crypto/sha256"
 	"encoding/hex"
@@ -39,6 +40,17 @@ func (k msgServer) CommitAnswer(goCtx context.Context, msg *types.MsgCommitAnswe
 	}
 
 	k.SetCommittedAnswer(ctx, commit)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+			sdk.NewAttribute(sdk.AttributeKeyAction, "commit_answer"),
+			sdk.NewAttribute(types.AttributeKeyQuestionId, strconv.FormatUint(msg.QuestionId, 10)),
+			sdk.NewAttribute(types.AttributeKeyCommitter, msg.Creator),
+			sdk.NewAttribute(types.AttributeKeyCommitHash, msg.HashAnswer),
+		),
+	)
 
 	return &types.MsgCommitAnswerResponse{}, nil
 }

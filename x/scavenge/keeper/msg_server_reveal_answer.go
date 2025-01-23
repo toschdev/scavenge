@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"scavenge/x/scavenge/types"
 
@@ -71,6 +72,17 @@ func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswe
 	question.Completed = true
 	question.Winner = msg.Creator
 	k.SetScavengeQuestion(ctx, question)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+			sdk.NewAttribute(sdk.AttributeKeyAction, "reveal_answer"),
+			sdk.NewAttribute(types.AttributeKeyQuestionId, strconv.FormatUint(msg.QuestionId, 10)),
+			sdk.NewAttribute(types.AttributeKeyWinner, msg.Creator),
+			sdk.NewAttribute(types.AttributeKeyBounty, strconv.FormatUint(question.Bounty, 10)),
+		),
+	)
 
 	return &types.MsgRevealAnswerResponse{}, nil
 }

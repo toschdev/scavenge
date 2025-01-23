@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"strconv"
 
 	"scavenge/x/scavenge/types"
 
@@ -41,6 +42,17 @@ func (k msgServer) CreateQuestion(goCtx context.Context, msg *types.MsgCreateQue
 
 	k.SetScavengeQuestion(ctx, question)
 	k.SetScavengeQuestionCount(ctx, count+1)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+			sdk.NewAttribute(sdk.AttributeKeyAction, "create_question"),
+			sdk.NewAttribute(types.AttributeKeyQuestionId, strconv.FormatUint(count, 10)),
+			sdk.NewAttribute(types.AttributeKeyCreator, msg.Creator),
+			sdk.NewAttribute(types.AttributeKeyBounty, strconv.FormatUint(msg.Bounty, 10)),
+		),
+	)
 
 	return &types.MsgCreateQuestionResponse{
 		Id: count,
