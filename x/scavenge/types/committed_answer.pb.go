@@ -23,9 +23,9 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type CommittedAnswer struct {
-	QuestionId uint64 `protobuf:"varint,1,opt,name=questionId,proto3" json:"questionId,omitempty"`
-	HashAnswer string `protobuf:"bytes,2,opt,name=hashAnswer,proto3" json:"hashAnswer,omitempty"`
-	Creator    string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	QuestionId uint64 `protobuf:"varint,2,opt,name=questionId,proto3" json:"questionId,omitempty"`
+	HashAnswer string `protobuf:"bytes,3,opt,name=hashAnswer,proto3" json:"hashAnswer,omitempty"`
 }
 
 func (m *CommittedAnswer) Reset()         { *m = CommittedAnswer{} }
@@ -61,6 +61,13 @@ func (m *CommittedAnswer) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_CommittedAnswer proto.InternalMessageInfo
 
+func (m *CommittedAnswer) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
 func (m *CommittedAnswer) GetQuestionId() uint64 {
 	if m != nil {
 		return m.QuestionId
@@ -75,13 +82,6 @@ func (m *CommittedAnswer) GetHashAnswer() string {
 	return ""
 }
 
-func (m *CommittedAnswer) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
 func init() {
 	proto.RegisterType((*CommittedAnswer)(nil), "scavenge.scavenge.CommittedAnswer")
 }
@@ -91,19 +91,19 @@ func init() {
 }
 
 var fileDescriptor_f1d0eea702bc0a10 = []byte{
-	// 177 bytes of a gzipped FileDescriptorProto
+	// 178 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xd2, 0x28, 0x4e, 0x4e, 0x2c,
 	0x4b, 0xcd, 0x4b, 0x4f, 0xd5, 0x87, 0x33, 0x92, 0xf3, 0x73, 0x73, 0x33, 0x4b, 0x4a, 0x52, 0x53,
 	0xe2, 0x13, 0xf3, 0x8a, 0xcb, 0x53, 0x8b, 0xf4, 0x0a, 0x8a, 0xf2, 0x4b, 0xf2, 0x85, 0x04, 0x61,
-	0x0a, 0xf4, 0x60, 0x0c, 0xa5, 0x6c, 0x2e, 0x7e, 0x67, 0x98, 0x62, 0x47, 0xb0, 0x5a, 0x21, 0x39,
-	0x2e, 0xae, 0xc2, 0xd2, 0xd4, 0xe2, 0x92, 0xcc, 0xfc, 0x3c, 0xcf, 0x14, 0x09, 0x46, 0x05, 0x46,
-	0x0d, 0x96, 0x20, 0x24, 0x11, 0x90, 0x7c, 0x46, 0x62, 0x71, 0x06, 0x44, 0xb5, 0x04, 0x93, 0x02,
-	0xa3, 0x06, 0x67, 0x10, 0x92, 0x88, 0x90, 0x04, 0x17, 0x7b, 0x72, 0x51, 0x6a, 0x62, 0x49, 0x7e,
-	0x91, 0x04, 0x33, 0x58, 0x12, 0xc6, 0x75, 0x32, 0x3e, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39,
-	0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63,
-	0x39, 0x86, 0x28, 0x49, 0xb8, 0xd3, 0x2b, 0x10, 0xbe, 0x28, 0xa9, 0x2c, 0x48, 0x2d, 0x4e, 0x62,
-	0x03, 0xbb, 0xdd, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0xb4, 0x3d, 0x3e, 0x57, 0xe7, 0x00, 0x00,
-	0x00,
+	0x0a, 0xf4, 0x60, 0x0c, 0xa5, 0x6c, 0x2e, 0x7e, 0x67, 0x98, 0x62, 0x47, 0xb0, 0x5a, 0x21, 0x09,
+	0x2e, 0xf6, 0xe4, 0xa2, 0xd4, 0xc4, 0x92, 0xfc, 0x22, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20,
+	0x18, 0x57, 0x48, 0x8e, 0x8b, 0xab, 0xb0, 0x34, 0xb5, 0xb8, 0x24, 0x33, 0x3f, 0xcf, 0x33, 0x45,
+	0x82, 0x49, 0x81, 0x51, 0x83, 0x25, 0x08, 0x49, 0x04, 0x24, 0x9f, 0x91, 0x58, 0x9c, 0x01, 0x31,
+	0x47, 0x82, 0x19, 0xac, 0x19, 0x49, 0xc4, 0xc9, 0xf8, 0xc4, 0x23, 0x39, 0xc6, 0x0b, 0x8f, 0xe4,
+	0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86, 0x1b, 0x8f,
+	0xe5, 0x18, 0xa2, 0x24, 0xe1, 0x4e, 0xaf, 0x40, 0xf8, 0xa2, 0xa4, 0xb2, 0x20, 0xb5, 0x38, 0x89,
+	0x0d, 0xec, 0x76, 0x63, 0x40, 0x00, 0x00, 0x00, 0xff, 0xff, 0xcc, 0xf6, 0x40, 0xf8, 0xe7, 0x00,
+	0x00, 0x00,
 }
 
 func (m *CommittedAnswer) Marshal() (dAtA []byte, err error) {
@@ -126,24 +126,24 @@ func (m *CommittedAnswer) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintCommittedAnswer(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0x1a
-	}
 	if len(m.HashAnswer) > 0 {
 		i -= len(m.HashAnswer)
 		copy(dAtA[i:], m.HashAnswer)
 		i = encodeVarintCommittedAnswer(dAtA, i, uint64(len(m.HashAnswer)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 	}
 	if m.QuestionId != 0 {
 		i = encodeVarintCommittedAnswer(dAtA, i, uint64(m.QuestionId))
 		i--
-		dAtA[i] = 0x8
+		dAtA[i] = 0x10
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintCommittedAnswer(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
@@ -165,14 +165,14 @@ func (m *CommittedAnswer) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovCommittedAnswer(uint64(l))
+	}
 	if m.QuestionId != 0 {
 		n += 1 + sovCommittedAnswer(uint64(m.QuestionId))
 	}
 	l = len(m.HashAnswer)
-	if l > 0 {
-		n += 1 + l + sovCommittedAnswer(uint64(l))
-	}
-	l = len(m.Creator)
 	if l > 0 {
 		n += 1 + l + sovCommittedAnswer(uint64(l))
 	}
@@ -215,57 +215,6 @@ func (m *CommittedAnswer) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field QuestionId", wireType)
-			}
-			m.QuestionId = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCommittedAnswer
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.QuestionId |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field HashAnswer", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowCommittedAnswer
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthCommittedAnswer
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthCommittedAnswer
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.HashAnswer = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
 			}
@@ -296,6 +245,57 @@ func (m *CommittedAnswer) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field QuestionId", wireType)
+			}
+			m.QuestionId = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCommittedAnswer
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.QuestionId |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field HashAnswer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCommittedAnswer
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCommittedAnswer
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCommittedAnswer
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.HashAnswer = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

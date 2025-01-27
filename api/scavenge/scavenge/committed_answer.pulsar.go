@@ -14,17 +14,17 @@ import (
 
 var (
 	md_CommittedAnswer            protoreflect.MessageDescriptor
+	fd_CommittedAnswer_creator    protoreflect.FieldDescriptor
 	fd_CommittedAnswer_questionId protoreflect.FieldDescriptor
 	fd_CommittedAnswer_hashAnswer protoreflect.FieldDescriptor
-	fd_CommittedAnswer_creator    protoreflect.FieldDescriptor
 )
 
 func init() {
 	file_scavenge_scavenge_committed_answer_proto_init()
 	md_CommittedAnswer = File_scavenge_scavenge_committed_answer_proto.Messages().ByName("CommittedAnswer")
+	fd_CommittedAnswer_creator = md_CommittedAnswer.Fields().ByName("creator")
 	fd_CommittedAnswer_questionId = md_CommittedAnswer.Fields().ByName("questionId")
 	fd_CommittedAnswer_hashAnswer = md_CommittedAnswer.Fields().ByName("hashAnswer")
-	fd_CommittedAnswer_creator = md_CommittedAnswer.Fields().ByName("creator")
 }
 
 var _ protoreflect.Message = (*fastReflection_CommittedAnswer)(nil)
@@ -92,6 +92,12 @@ func (x *fastReflection_CommittedAnswer) Interface() protoreflect.ProtoMessage {
 // While iterating, mutating operations may only be performed
 // on the current field descriptor.
 func (x *fastReflection_CommittedAnswer) Range(f func(protoreflect.FieldDescriptor, protoreflect.Value) bool) {
+	if x.Creator != "" {
+		value := protoreflect.ValueOfString(x.Creator)
+		if !f(fd_CommittedAnswer_creator, value) {
+			return
+		}
+	}
 	if x.QuestionId != uint64(0) {
 		value := protoreflect.ValueOfUint64(x.QuestionId)
 		if !f(fd_CommittedAnswer_questionId, value) {
@@ -101,12 +107,6 @@ func (x *fastReflection_CommittedAnswer) Range(f func(protoreflect.FieldDescript
 	if x.HashAnswer != "" {
 		value := protoreflect.ValueOfString(x.HashAnswer)
 		if !f(fd_CommittedAnswer_hashAnswer, value) {
-			return
-		}
-	}
-	if x.Creator != "" {
-		value := protoreflect.ValueOfString(x.Creator)
-		if !f(fd_CommittedAnswer_creator, value) {
 			return
 		}
 	}
@@ -125,12 +125,12 @@ func (x *fastReflection_CommittedAnswer) Range(f func(protoreflect.FieldDescript
 // a repeated field is populated if it is non-empty.
 func (x *fastReflection_CommittedAnswer) Has(fd protoreflect.FieldDescriptor) bool {
 	switch fd.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		return x.Creator != ""
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		return x.QuestionId != uint64(0)
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
 		return x.HashAnswer != ""
-	case "scavenge.scavenge.CommittedAnswer.creator":
-		return x.Creator != ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.CommittedAnswer"))
@@ -147,12 +147,12 @@ func (x *fastReflection_CommittedAnswer) Has(fd protoreflect.FieldDescriptor) bo
 // Clear is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_CommittedAnswer) Clear(fd protoreflect.FieldDescriptor) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		x.Creator = ""
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		x.QuestionId = uint64(0)
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
 		x.HashAnswer = ""
-	case "scavenge.scavenge.CommittedAnswer.creator":
-		x.Creator = ""
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.CommittedAnswer"))
@@ -169,14 +169,14 @@ func (x *fastReflection_CommittedAnswer) Clear(fd protoreflect.FieldDescriptor) 
 // of the value; to obtain a mutable reference, use Mutable.
 func (x *fastReflection_CommittedAnswer) Get(descriptor protoreflect.FieldDescriptor) protoreflect.Value {
 	switch descriptor.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		value := x.Creator
+		return protoreflect.ValueOfString(value)
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		value := x.QuestionId
 		return protoreflect.ValueOfUint64(value)
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
 		value := x.HashAnswer
-		return protoreflect.ValueOfString(value)
-	case "scavenge.scavenge.CommittedAnswer.creator":
-		value := x.Creator
 		return protoreflect.ValueOfString(value)
 	default:
 		if descriptor.IsExtension() {
@@ -198,12 +198,12 @@ func (x *fastReflection_CommittedAnswer) Get(descriptor protoreflect.FieldDescri
 // Set is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_CommittedAnswer) Set(fd protoreflect.FieldDescriptor, value protoreflect.Value) {
 	switch fd.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		x.Creator = value.Interface().(string)
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		x.QuestionId = value.Uint()
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
 		x.HashAnswer = value.Interface().(string)
-	case "scavenge.scavenge.CommittedAnswer.creator":
-		x.Creator = value.Interface().(string)
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.CommittedAnswer"))
@@ -224,12 +224,12 @@ func (x *fastReflection_CommittedAnswer) Set(fd protoreflect.FieldDescriptor, va
 // Mutable is a mutating operation and unsafe for concurrent use.
 func (x *fastReflection_CommittedAnswer) Mutable(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		panic(fmt.Errorf("field creator of message scavenge.scavenge.CommittedAnswer is not mutable"))
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		panic(fmt.Errorf("field questionId of message scavenge.scavenge.CommittedAnswer is not mutable"))
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
 		panic(fmt.Errorf("field hashAnswer of message scavenge.scavenge.CommittedAnswer is not mutable"))
-	case "scavenge.scavenge.CommittedAnswer.creator":
-		panic(fmt.Errorf("field creator of message scavenge.scavenge.CommittedAnswer is not mutable"))
 	default:
 		if fd.IsExtension() {
 			panic(fmt.Errorf("proto3 declared messages do not support extensions: scavenge.scavenge.CommittedAnswer"))
@@ -243,11 +243,11 @@ func (x *fastReflection_CommittedAnswer) Mutable(fd protoreflect.FieldDescriptor
 // For lists, maps, and messages, this returns a new, empty, mutable value.
 func (x *fastReflection_CommittedAnswer) NewField(fd protoreflect.FieldDescriptor) protoreflect.Value {
 	switch fd.FullName() {
+	case "scavenge.scavenge.CommittedAnswer.creator":
+		return protoreflect.ValueOfString("")
 	case "scavenge.scavenge.CommittedAnswer.questionId":
 		return protoreflect.ValueOfUint64(uint64(0))
 	case "scavenge.scavenge.CommittedAnswer.hashAnswer":
-		return protoreflect.ValueOfString("")
-	case "scavenge.scavenge.CommittedAnswer.creator":
 		return protoreflect.ValueOfString("")
 	default:
 		if fd.IsExtension() {
@@ -318,14 +318,14 @@ func (x *fastReflection_CommittedAnswer) ProtoMethods() *protoiface.Methods {
 		var n int
 		var l int
 		_ = l
+		l = len(x.Creator)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
+		}
 		if x.QuestionId != 0 {
 			n += 1 + runtime.Sov(uint64(x.QuestionId))
 		}
 		l = len(x.HashAnswer)
-		if l > 0 {
-			n += 1 + l + runtime.Sov(uint64(l))
-		}
-		l = len(x.Creator)
 		if l > 0 {
 			n += 1 + l + runtime.Sov(uint64(l))
 		}
@@ -358,24 +358,24 @@ func (x *fastReflection_CommittedAnswer) ProtoMethods() *protoiface.Methods {
 			i -= len(x.unknownFields)
 			copy(dAtA[i:], x.unknownFields)
 		}
-		if len(x.Creator) > 0 {
-			i -= len(x.Creator)
-			copy(dAtA[i:], x.Creator)
-			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
-			i--
-			dAtA[i] = 0x1a
-		}
 		if len(x.HashAnswer) > 0 {
 			i -= len(x.HashAnswer)
 			copy(dAtA[i:], x.HashAnswer)
 			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.HashAnswer)))
 			i--
-			dAtA[i] = 0x12
+			dAtA[i] = 0x1a
 		}
 		if x.QuestionId != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.QuestionId))
 			i--
-			dAtA[i] = 0x8
+			dAtA[i] = 0x10
+		}
+		if len(x.Creator) > 0 {
+			i -= len(x.Creator)
+			copy(dAtA[i:], x.Creator)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.Creator)))
+			i--
+			dAtA[i] = 0xa
 		}
 		if input.Buf != nil {
 			input.Buf = append(input.Buf, dAtA...)
@@ -427,57 +427,6 @@ func (x *fastReflection_CommittedAnswer) ProtoMethods() *protoiface.Methods {
 			}
 			switch fieldNum {
 			case 1:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field QuestionId", wireType)
-				}
-				x.QuestionId = 0
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					x.QuestionId |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-			case 2:
-				if wireType != 2 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field HashAnswer", wireType)
-				}
-				var stringLen uint64
-				for shift := uint(0); ; shift += 7 {
-					if shift >= 64 {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
-					}
-					if iNdEx >= l {
-						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-					}
-					b := dAtA[iNdEx]
-					iNdEx++
-					stringLen |= uint64(b&0x7F) << shift
-					if b < 0x80 {
-						break
-					}
-				}
-				intStringLen := int(stringLen)
-				if intStringLen < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				postIndex := iNdEx + intStringLen
-				if postIndex < 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
-				}
-				if postIndex > l {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
-				}
-				x.HashAnswer = string(dAtA[iNdEx:postIndex])
-				iNdEx = postIndex
-			case 3:
 				if wireType != 2 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
 				}
@@ -508,6 +457,57 @@ func (x *fastReflection_CommittedAnswer) ProtoMethods() *protoiface.Methods {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
 				}
 				x.Creator = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
+			case 2:
+				if wireType != 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field QuestionId", wireType)
+				}
+				x.QuestionId = 0
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					x.QuestionId |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+			case 3:
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field HashAnswer", wireType)
+				}
+				var stringLen uint64
+				for shift := uint(0); ; shift += 7 {
+					if shift >= 64 {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
+					}
+					if iNdEx >= l {
+						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+					}
+					b := dAtA[iNdEx]
+					iNdEx++
+					stringLen |= uint64(b&0x7F) << shift
+					if b < 0x80 {
+						break
+					}
+				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.HashAnswer = string(dAtA[iNdEx:postIndex])
 				iNdEx = postIndex
 			default:
 				iNdEx = preIndex
@@ -562,9 +562,9 @@ type CommittedAnswer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	QuestionId uint64 `protobuf:"varint,1,opt,name=questionId,proto3" json:"questionId,omitempty"`
-	HashAnswer string `protobuf:"bytes,2,opt,name=hashAnswer,proto3" json:"hashAnswer,omitempty"`
-	Creator    string `protobuf:"bytes,3,opt,name=creator,proto3" json:"creator,omitempty"`
+	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	QuestionId uint64 `protobuf:"varint,2,opt,name=questionId,proto3" json:"questionId,omitempty"`
+	HashAnswer string `protobuf:"bytes,3,opt,name=hashAnswer,proto3" json:"hashAnswer,omitempty"`
 }
 
 func (x *CommittedAnswer) Reset() {
@@ -587,6 +587,13 @@ func (*CommittedAnswer) Descriptor() ([]byte, []int) {
 	return file_scavenge_scavenge_committed_answer_proto_rawDescGZIP(), []int{0}
 }
 
+func (x *CommittedAnswer) GetCreator() string {
+	if x != nil {
+		return x.Creator
+	}
+	return ""
+}
+
 func (x *CommittedAnswer) GetQuestionId() uint64 {
 	if x != nil {
 		return x.QuestionId
@@ -601,13 +608,6 @@ func (x *CommittedAnswer) GetHashAnswer() string {
 	return ""
 }
 
-func (x *CommittedAnswer) GetCreator() string {
-	if x != nil {
-		return x.Creator
-	}
-	return ""
-}
-
 var File_scavenge_scavenge_committed_answer_proto protoreflect.FileDescriptor
 
 var file_scavenge_scavenge_committed_answer_proto_rawDesc = []byte{
@@ -616,12 +616,12 @@ var file_scavenge_scavenge_committed_answer_proto_rawDesc = []byte{
 	0x73, 0x77, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x11, 0x73, 0x63, 0x61, 0x76,
 	0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x22, 0x6b, 0x0a,
 	0x0f, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72,
-	0x12, 0x1e, 0x0a, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x04, 0x52, 0x0a, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
-	0x12, 0x1e, 0x0a, 0x0a, 0x68, 0x61, 0x73, 0x68, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x68, 0x61, 0x73, 0x68, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72,
-	0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x42, 0xb2, 0x01, 0x0a, 0x15, 0x63,
+	0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x1e, 0x0a, 0x0a, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x04, 0x52, 0x0a,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x68, 0x61,
+	0x73, 0x68, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x68, 0x61, 0x73, 0x68, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x42, 0xb2, 0x01, 0x0a, 0x15, 0x63,
 	0x6f, 0x6d, 0x2e, 0x73, 0x63, 0x61, 0x76, 0x65, 0x6e, 0x67, 0x65, 0x2e, 0x73, 0x63, 0x61, 0x76,
 	0x65, 0x6e, 0x67, 0x65, 0x42, 0x14, 0x43, 0x6f, 0x6d, 0x6d, 0x69, 0x74, 0x74, 0x65, 0x64, 0x41,
 	0x6e, 0x73, 0x77, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x1e, 0x73, 0x63,

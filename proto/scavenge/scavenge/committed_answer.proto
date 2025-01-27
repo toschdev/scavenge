@@ -5,7 +5,7 @@ option go_package = "scavenge/x/scavenge/types";
 
 message CommittedAnswer {
   
-  uint64 questionId = 1; 
-  string hashAnswer = 2; 
-  string creator = 3; 
+  string creator = 1; 
+  uint64 questionId = 2; 
+  string hashAnswer = 3; 
 }

@@ -18,9 +18,18 @@ import (
 func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswer) (*types.MsgRevealAnswerResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	// Get the question
+	question, found := k.GetScavengeQuestion(ctx, msg.QuestionId)
+	if !found {
+		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, "question not found")
+	}
+
+	if question.Completed {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "question already completed")
+	}
+
 	// First verify the commit exists by recreating the hash of solution + creator
-	plainTextToHash := []byte(msg.PlainText)
-	plainTextSha := sha256.Sum256(plainTextToHash)
+	plainTextSha := sha256.Sum256([]byte(msg.PlainText))
 	encodedPlainText := hex.EncodeToString(plainTextSha[:])
 
 	solutionScavengerBytes := []byte(encodedPlainText + msg.Creator)
@@ -38,23 +47,9 @@ func (k msgServer) RevealAnswer(goCtx context.Context, msg *types.MsgRevealAnswe
 		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "committed hash does not match: "+commitHash)
 	}
 
-	// Now hash just the solution to find the matching question
-	solutionHash := sha256.Sum256([]byte(msg.PlainText))
-	solutionHashString := hex.EncodeToString(solutionHash[:])
-
-	// Get the question
-	question, found := k.GetScavengeQuestion(ctx, msg.QuestionId)
-	if !found {
-		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, "question not found")
-	}
-
 	// Verify the solution hash matches the question's encrypted answer
-	if solutionHashString != question.EncryptedAnswer {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "incorrect answer")
-	}
-
-	if question.Completed {
-		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "question already completed")
+	if encodedPlainText != question.EncryptedAnswer {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "incorrect answer "+msg.PlainText+": "+encodedPlainText+" vs "+question.EncryptedAnswer)
 	}
 
 	// Award the bounty

@@ -21,8 +21,11 @@ import (
 	// this line is used by starport scaffolding # 1
 
 	modulev1 "scavenge/api/scavenge/scavenge/module"
+	"scavenge/x/scavenge/client/cli"
 	"scavenge/x/scavenge/keeper"
 	"scavenge/x/scavenge/types"
+
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -45,6 +48,10 @@ var (
 // independent methods a Cosmos SDK module needs to implement.
 type AppModuleBasic struct {
 	cdc codec.BinaryCodec
+}
+
+func (am AppModule) GetTxCmd() *cobra.Command {
+	return cli.GetTxCmd()
 }
 
 func NewAppModuleBasic(cdc codec.BinaryCodec) AppModuleBasic {
